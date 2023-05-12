@@ -1,4 +1,5 @@
 ﻿using MakeupWebShop.Db;
+using MakeupWebShop.Models.DTO;
 
 namespace MakeupWebShop.Repositories
 {
@@ -11,5 +12,6 @@ namespace MakeupWebShop.Repositories
 
         Task<TblAdresa> UpdateAsync(int id, TblAdresa tblAdresa);
         Task<TblAdresa> DeleteAsync(int id);
+        Task<TblAdresa> GetAdresaByDetailsAsync(AddKorisnikRequest korisnikDto);
     }
 }

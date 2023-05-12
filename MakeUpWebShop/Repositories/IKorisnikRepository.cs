@@ -11,7 +11,7 @@ namespace MakeupWebShop.Repositories
         Task<TblKorisnik> AddAsync(TblKorisnik tblKorisnik);
 
         Task<TblKorisnik> UpdateAsync(int id, TblKorisnik tblKorisnik);
-        //Task<TblKorisnik> UpdateUlogaAsync(int id, TblKorisnik tblKorisnik);
+        Task<TblKorisnik> UpdateUlogaAsync(int id, TblKorisnik tblKorisnik);
         Task<TblKorisnik> DeleteAsync(int id);
     }
 }

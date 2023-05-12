@@ -22,12 +22,15 @@ namespace MakeupWebShop.Controllers
     {
         private readonly IConfiguration configuration;
         private readonly IKorisnikRepository korisnikRepository;
+        private readonly IAdresaRepository adresaRepository;
         private readonly IMapper mapper;
-        public KorisnikController(IKorisnikRepository korisnikRepository, IMapper mapper,IConfiguration configuration)
+        public KorisnikController(IKorisnikRepository korisnikRepository, IMapper mapper,
+            IConfiguration configuration, IAdresaRepository adresaRepository)
         {
             this.configuration = configuration;
             this.korisnikRepository = korisnikRepository;
             this.mapper = mapper;
+            this.adresaRepository = adresaRepository;
         }
         [HttpGet, Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetAllUsersAsync()
@@ -57,6 +60,9 @@ namespace MakeupWebShop.Controllers
         public async Task<IActionResult> AddUserAsync(Models.DTO.AddKorisnikRequest addKorisnikRequest)
         {
             string hashLozinka = BCrypt.Net.BCrypt.HashPassword(addKorisnikRequest.Lozinka);
+            // Check if the address already exists
+            TblAdresa adresa = await adresaRepository.GetAdresaByDetailsAsync(addKorisnikRequest);
+
 
             //Request(DTO) to entity model
             var userEntity = new Db.TblKorisnik()
@@ -69,9 +75,10 @@ namespace MakeupWebShop.Controllers
                 Kontakt = addKorisnikRequest.Kontakt,
                 Username = addKorisnikRequest.Username,
                 Lozinka = hashLozinka,
-                BrojKupovina = addKorisnikRequest.BrojKupovina,
-                AdresaId = addKorisnikRequest.AdresaId,
-                UlogaId = addKorisnikRequest.UlogaId,
+                BrojKupovina = 0,
+                Adresa = adresa,
+                UlogaId =1,
+                //UlogaId = addKorisnikRequest.UlogaId,
 
             };
             if (userEntity.UlogaId == 2)
@@ -125,9 +132,10 @@ namespace MakeupWebShop.Controllers
             return Ok(userDto);
         }
         [HttpPut, Authorize(Roles = "Admin,User")]
-        [Route("{id:int}")]
+        [Route("{id:int}/korisnik")]
         public async Task<IActionResult> UpdateUserAsync([FromRoute] int id, [FromBody] Models.DTO.UpdateKorisnikRequest updateKorisnikRequest)
         {
+            string hashLozinka = BCrypt.Net.BCrypt.HashPassword(updateKorisnikRequest.Lozinka);
             //Convert DTO to entity
             var userEntity = new Db.TblKorisnik()
             {
@@ -137,10 +145,10 @@ namespace MakeupWebShop.Controllers
                 Email = updateKorisnikRequest.Email,
                 Kontakt = updateKorisnikRequest.Kontakt,
                 Username = updateKorisnikRequest.Username,
-                Lozinka = updateKorisnikRequest.Lozinka,
+                Lozinka = hashLozinka,
                 BrojKupovina = updateKorisnikRequest.BrojKupovina,
                 AdresaId = updateKorisnikRequest.AdresaId,
-                UlogaId = updateKorisnikRequest.UlogaId,
+                //UlogaId = updateKorisnikRequest.UlogaId,
             };
 
 
@@ -160,9 +168,9 @@ namespace MakeupWebShop.Controllers
             return Ok(userDto);
         }
 
-        /*[HttpPut("roleset"), Authorize(Roles = "Admin")]
-        [Route("{id:int}")]
-        public async Task<IActionResult> UpdateUserRoleAsync([FromRoute] int id, [FromBody] Models.DTO.UpdateKorisnikUlogaRequest updateKorisnikUlogaRequest)
+        [HttpPut, Authorize(Roles = "Admin")]
+        [Route("{korisnikId:int}/uloga")]
+        public async Task<IActionResult> UpdateUserRoleAsync([FromRoute] int korisnikId, [FromBody] Models.DTO.UpdateKorisnikUlogaRequest updateKorisnikUlogaRequest)
         {
             //Convert DTO to entity
             var userEntity = new Db.TblKorisnik()
@@ -173,7 +181,7 @@ namespace MakeupWebShop.Controllers
 
             //Update Address using repository
 
-            userEntity = await korisnikRepository.UpdateUlogaAsync(id, userEntity);
+            userEntity = await korisnikRepository.UpdateUlogaAsync(korisnikId, userEntity);
 
             //if null NotFound
             if (userEntity == null)
@@ -185,7 +193,7 @@ namespace MakeupWebShop.Controllers
             var userDto = mapper.Map<Models.DTO.Korisnik>(userEntity);
             //Return ok
             return Ok(userDto);
-        }*/
+        }
 
 
         private string CreateToken(TblKorisnik korisnik)

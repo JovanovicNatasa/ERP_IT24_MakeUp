@@ -75,7 +75,7 @@ namespace MakeupWebShop.Repositories
             return existingTblKorisnik;
         }
 
-        /*public async Task<TblKorisnik> UpdateUlogaAsync(int id, TblKorisnik tblKorisnik)
+        public async Task<TblKorisnik> UpdateUlogaAsync(int id, TblKorisnik tblKorisnik)
         {
             var existingTblKorisnik = await makeUpDbContext.TblKorisniks.FirstOrDefaultAsync(x => x.KorisnikId == id);
             if (existingTblKorisnik == null)
@@ -87,6 +87,6 @@ namespace MakeupWebShop.Repositories
             await makeUpDbContext.SaveChangesAsync();
 
             return existingTblKorisnik;
-        }*/
+        }
     }
 }

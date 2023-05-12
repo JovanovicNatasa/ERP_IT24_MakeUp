@@ -12,6 +12,7 @@ namespace MakeupWebShop.Repositories
     {
         private readonly MakeUpDbContext makeUpDbContext;
 
+
         public ProizvodUKorpiRepository(MakeUpDbContext makeUpDbContext)
         {
             this.makeUpDbContext = makeUpDbContext;
@@ -43,6 +44,12 @@ namespace MakeupWebShop.Repositories
             return await makeUpDbContext.TblProizvodUkorpis.Include(x => x.Proizvod).Include(x => x.Korpa).ToListAsync();
         }
 
+        public async Task<TblProizvodUkorpi> GetByKorpaIdAsync(int korpaId)
+        {
+            return await makeUpDbContext.TblProizvodUkorpis.Include(x => x.Proizvod).Include(x => x.Korpa)
+               .FirstOrDefaultAsync(x => x.KorpaId == korpaId);
+        }
+
         public async Task<TblProizvodUkorpi> GetByIdAsync(int id)
         {
             return await makeUpDbContext.TblProizvodUkorpis.Include(x => x.Proizvod).Include(x => x.Korpa)
@@ -51,6 +58,8 @@ namespace MakeupWebShop.Repositories
 
         public async Task<TblProizvodUkorpi> UpdateAsync(int id, TblProizvodUkorpi tblProizvodUkorpi)
         {
+           /* var oldTblProizvodUKorpi = await makeUpDbContext.TblProizvodUkorpis.FirstOrDefaultAsync(x => x.ProizUkorpiId == id);
+            var existingTblProizvodUKorpi = oldTblProizvodUKorpi;*/
 
             var existingTblProizvodUKorpi = await makeUpDbContext.TblProizvodUkorpis.FirstOrDefaultAsync(x => x.ProizUkorpiId == id);
             if (existingTblProizvodUKorpi == null)
@@ -59,16 +68,13 @@ namespace MakeupWebShop.Repositories
             }
 
             existingTblProizvodUKorpi.BrojKomada = tblProizvodUkorpi.BrojKomada;
-            existingTblProizvodUKorpi.ProizvodId = tblProizvodUkorpi.ProizvodId;
-            existingTblProizvodUKorpi.KorpaId = tblProizvodUkorpi.KorpaId;
-
-
+            existingTblProizvodUKorpi.ProizvodId = existingTblProizvodUKorpi.ProizvodId;
+            existingTblProizvodUKorpi.KorpaId = existingTblProizvodUKorpi.KorpaId;
 
             await makeUpDbContext.SaveChangesAsync();
 
             return existingTblProizvodUKorpi;
         }
 
-        
     }
 }

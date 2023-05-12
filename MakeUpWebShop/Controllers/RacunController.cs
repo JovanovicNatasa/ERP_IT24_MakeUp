@@ -43,28 +43,30 @@ namespace MakeupWebShop.Controllers
         [HttpPost]
         public async Task<IActionResult> AddBillAsync(Models.DTO.AddRacunRequest addRacunRequest)
         {
-            //Request(DTO) to entity model
+
+            // Request(DTO) to entity model
             var billEntity = new Db.TblRacun()
             {
                 RacunId = addRacunRequest.RacunId,
-                DatumKupovine = addRacunRequest.DatumKupovine,
-                VremeKupovine = addRacunRequest.VremeKupovine,
-                IznosPost = addRacunRequest.IznosPost,
-                IznosSaPost = addRacunRequest.IznosSaPost,
-                IznosPopusta = addRacunRequest.IznosPopusta,
-                IznosSaPopustom = addRacunRequest.IznosSaPopustom,
+                DatumKupovine = DateTime.Today,
+                VremeKupovine = DateTime.Now.TimeOfDay,
+                IznosPopusta = 0,
                 KorpaId = addRacunRequest.KorpaId,
-
             };
-            //pass details to Repository
-            billEntity = await racunRepository.AddAsync(billEntity);
 
-            //Conwert back to DTO
-            var billDto = mapper.Map<Models.DTO.Racun>(billEntity);
-            /*
-            return CreatedAtAction(nameof(GetAddressByIdAsync), new { id = addressDto.AdresaId }, addressDto);
-           */
+            // Pass details to Repository
+            var addedBillEntity = await racunRepository.AddAsync(billEntity);
+
+            // Refresh the entity from the database to capture any changes made by triggers
+           // var refreshedBillEntity = await racunRepository.GetByIdAsync(addedBillEntity.RacunId);
+
+            var billEntityWithDiscount = await racunRepository.CalculateShipping(addedBillEntity.RacunId);
+
+            var billDto = mapper.Map<Models.DTO.Racun>(billEntityWithDiscount);
+
             return Ok(billDto);
+
+
         }
         [HttpDelete,Authorize(Roles = "Admin")]
         [Route("{id:int}")]

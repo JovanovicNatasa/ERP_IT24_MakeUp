@@ -11,5 +11,7 @@ namespace MakeupWebShop.Repositories
 
         Task<TblProizvod> UpdateAsync(int id, TblProizvod tblProizvod);
         Task<TblProizvod> DeleteAsync(int id);
+        Task<TblProizvod> AddProductToCart(int productId, int quantity,int proizUKorpiId, int korpaId);
+        Task RemoveProductFromCart(int productId, int quantity, int korpaId);
     }
 }

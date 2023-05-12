@@ -11,5 +11,6 @@ namespace MakeupWebShop.Repositories
 
         Task<TblRacun> UpdateAsync(int id, TblRacun tblRacun);
         Task<TblRacun> DeleteAsync(int id);
+        Task<TblRacun> CalculateShipping(int racunId);
     }
 }

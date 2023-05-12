@@ -1,4 +1,5 @@
 ﻿using MakeupWebShop.Db;
+using MakeupWebShop.Models.DTO;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -68,6 +69,30 @@ namespace MakeupWebShop.Repositories
             await makeUpDbContext.SaveChangesAsync();
 
             return existingTblAdresa;
+        }
+        public async Task<TblAdresa> GetAdresaByDetailsAsync(AddKorisnikRequest addKorisnikRequest)
+        {
+            var adresa = await makeUpDbContext.TblAdresas
+        .FirstOrDefaultAsync(a => a.Grad == addKorisnikRequest.Adresa.Grad &&
+                               a.Ulica == addKorisnikRequest.Adresa.Ulica &&
+                               a.Broj == addKorisnikRequest.Adresa.Broj &&
+                               a.PostanskiBroj == addKorisnikRequest.Adresa.PostanskiBroj);
+
+            if (adresa == null)
+            {
+                adresa = new TblAdresa
+                {
+                    Grad = addKorisnikRequest.Adresa.Grad,
+                    Ulica = addKorisnikRequest.Adresa.Ulica,
+                    Broj = addKorisnikRequest.Adresa.Broj,
+                    PostanskiBroj = addKorisnikRequest.Adresa.PostanskiBroj
+                };
+
+                makeUpDbContext.TblAdresas.Add(adresa);
+                await makeUpDbContext.SaveChangesAsync();
+            }
+
+            return adresa;
         }
     }
 }

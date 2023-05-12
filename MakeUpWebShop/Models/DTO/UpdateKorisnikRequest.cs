@@ -22,6 +22,6 @@ namespace MakeupWebShop.Models.DTO
 
         public int? AdresaId { get; set; }
 
-        public int? UlogaId { get; set; }
+        //public int? UlogaId { get; set; }
     }
 }

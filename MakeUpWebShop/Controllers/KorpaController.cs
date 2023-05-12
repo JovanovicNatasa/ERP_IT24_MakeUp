@@ -11,10 +11,15 @@ namespace MakeupWebShop.Controllers
     public class KorpaController : Controller
     {
         private readonly IKorpaRepository korpaRepository;
+       /* private readonly IProizvodUKorpiRepository proizvodUKorpiRepository;
+        private readonly IProizvodRepository proizvodRepository;*/
         private readonly IMapper mapper;
-        public KorpaController(IKorpaRepository korpaRepository, IMapper mapper)
+        public KorpaController(IKorpaRepository korpaRepository, /*IProizvodUKorpiRepository proizvodUKorpiRepository,
+            IProizvodRepository proizvodRepository,*/ IMapper mapper)
         {
             this.korpaRepository = korpaRepository;
+           /* this.proizvodUKorpiRepository= proizvodUKorpiRepository;
+            this.proizvodRepository=proizvodRepository;*/
             this.mapper = mapper;
         }
         [HttpGet, Authorize(Roles = "Admin")]
@@ -47,10 +52,10 @@ namespace MakeupWebShop.Controllers
             var shoppingCartEntity = new Db.TblKorpa()
             {
                 KorpaId = addKorpaRequest.KorpaId,
-                UkupanIznos = addKorpaRequest.UkupanIznos,
-                BrProizvoda = addKorpaRequest.BrProizvoda,
-                Popust = addKorpaRequest.Popust,
-                ProcenatPop = addKorpaRequest.ProcenatPop,
+                UkupanIznos = 0,
+                BrProizvoda = 0,
+                Popust = false,
+                ProcenatPop = 0,
                 KorisnikId = addKorpaRequest.KorisnikId,
 
             };
@@ -112,5 +117,6 @@ namespace MakeupWebShop.Controllers
             //Return ok
             return Ok(shoppingCartDto);
         }
+
     }
 }

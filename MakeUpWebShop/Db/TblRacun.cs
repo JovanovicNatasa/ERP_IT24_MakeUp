@@ -17,7 +17,7 @@ public partial class TblRacun
 
     public decimal? IznosPopusta { get; set; }
 
-    public decimal? IznosSaPopustom { get; set; }
+    public decimal IznosSaPopustom { get; set; }
 
     public int KorpaId { get; set; }
 

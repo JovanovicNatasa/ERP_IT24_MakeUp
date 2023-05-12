@@ -16,7 +16,7 @@ namespace MakeupWebShop.Models.DTO
 
         public decimal? IznosPopusta { get; set; }
 
-        public decimal? IznosSaPopustom { get; set; }
+        public decimal IznosSaPopustom { get; set; }
 
         public int KorpaId { get; set; }
         public virtual TblKorpa Korpa { get; set; } = null!;

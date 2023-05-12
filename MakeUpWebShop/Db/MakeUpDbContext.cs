@@ -87,8 +87,6 @@ public partial class MakeUpDbContext : DbContext
             entity.HasKey(e => e.KorisnikId);
 
             entity.ToTable("tblKorisnik", tb => tb.HasTrigger("trg_SetPopustAndProcenatPop"));
-           /* entity.ToTable("tblKorisnik", tb => tb.HasSqlServerCreateProcedure("proc_SetPopustAndProcenatPop_Create"))
-            .HasSqlServerDropProcedure("proc_SetPopustAndProcenatPop_Drop");*/
 
             entity.Property(e => e.KorisnikId)
                 .HasColumnType("int")
@@ -103,7 +101,7 @@ public partial class MakeUpDbContext : DbContext
                 .HasMaxLength(13)
                 .HasColumnName("JMBG");
             entity.Property(e => e.Kontakt).HasMaxLength(20);
-            entity.Property(e => e.Lozinka).HasMaxLength(50);
+            entity.Property(e => e.Lozinka).HasMaxLength(200);
             entity.Property(e => e.Prezime).HasMaxLength(50);
             entity.Property(e => e.UlogaId)
                 .HasColumnType("int")
@@ -123,7 +121,7 @@ public partial class MakeUpDbContext : DbContext
         {
             entity.HasKey(e => e.KorpaId);
 
-            entity.ToTable("tblKorpa", tb => { tb.HasTrigger("trgr_calculate_discount"); });
+            entity.ToTable("tblKorpa", tb =>  tb.HasTrigger("trgr_calculate_discount"));
 
             entity.Property(e => e.KorpaId)
                 .HasColumnType("int")
