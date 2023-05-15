@@ -25,7 +25,7 @@ namespace MakeupWebShop.Models.DTO
         public int? AdresaId { get; set; }
 
         public int? UlogaId { get; set; }
-        //public virtual TblAdresa? Adresa { get; set; }
+        public virtual TblAdresa? Adresa { get; set; }
         //public virtual TblUloga? Uloga { get; set; }
     }
 }
