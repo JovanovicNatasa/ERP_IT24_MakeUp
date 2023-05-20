@@ -1,0 +1,111 @@
+
+.mat-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.navigation{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  margin-left: -50px;
+}
+.navigation-button{
+  font-weight: bold;
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+
+.mat-button-base{
+  margin-right: 1.5em;
+}
+.mat-icon{
+  align-self: center;
+}
+.person{
+  margin-right: 3px;
+  margin-left: 8px;
+
+}
+.search{
+  display: inline-block;
+  display: flex;
+  align-items: center;
+}
+
+.logo{
+  align-items: center;
+}
+
+.oval-textbox {
+  width: 230px;
+  height: 30px;
+  background-color: white;
+  border-radius: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  margin-right: 0.1em;
+}
+
+.oval-textbox input {
+  flex-grow: 1;
+  border: none;
+  background-color: transparent;
+  outline: none;
+}
+
+.tools {
+  display: inline-block;
+  display: flex;
+  margin-left: 60px;
+  margin-right: 60px;
+}
+.tools span{
+  margin-left: 15px;
+}
+
+.menu-container{
+  position:absolute;
+  margin-left: 630px;
+  width: 200px;
+  font-size: 18px;
+
+}
+.menu-container-category{
+  position:absolute;
+  margin-left: 600px;
+  width: 180px;
+  font-size: 14px;
+}
+
+.menu-togler{
+  padding: 10px;
+  font-weight: bold;
+}
+.menu{
+  background-color: white;
+  color: #512DA8;
+  padding: 10px;
+}
+.menu-category{
+  background-color: white;
+  color: #512DA8;
+  padding: 8px;
+  text-align: justify;
+}
+.menu-item{
+  cursor: pointer;
+  padding: 5px 0;
+}
+.menu-item:hover{
+  text-decoration: underline;
+}
+
+
+
+

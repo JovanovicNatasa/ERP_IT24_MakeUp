@@ -1,0 +1,49 @@
+<head>
+  <title>Slide Navbar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="main">
+    <input type="checkbox" id="chk" aria-hidden="true">
+    <div class="signup">
+      <form>
+        <label for="chk" aria-hidden="true">Sign up</label>
+        <div class="input-group">
+          <input type="text" name="ime" placeholder="Ime" required>
+          <input type="text" name="prezime" placeholder="Prezime" required>
+        </div>
+        <div class="input-group">
+          <input type="email" name="email" placeholder="Email" required>
+          <input type="text" name="jmbg" placeholder="JMBG" required minlength="13" maxlength="13" pattern="[0-9]{13}" title="JMBG must be 13 digits">
+        </div>
+        <div class="input-group">
+          <input type="text" name="kontakt" placeholder="Kontakt" required>
+          <input type="text" name="username" placeholder="Username" required>
+        </div>
+        <div class="input-group">
+          <input type="password" name="lozinka" placeholder="Lozinka" required>
+          <input type="text" name="grad" placeholder="Grad" required>
+        </div>
+        <div class="input-group">
+          <input type="text" name="ulica" placeholder="Ulica" required>
+          <input type="text" name="broj" placeholder="Broj" required>
+        </div>
+        <div class="input-group">
+          <input type="text" name="postanskiBroj" placeholder="Poštanski broj" required>
+        </div>
+        <button>Sign up</button>
+      </form>
+    </div>
+
+    <div class="login">
+      <form class="login-form">
+        <label for="chk" aria-hidden="true">Login</label>
+        <div class="input-group">
+          <input type="text" name="username" placeholder="Username required">
+          <input type="password" name="lozinka" placeholder="Lozinka" required>
+        </div>
+        <button>Login</button>
+      </form>
+    </div>
+  </div>
+</body>

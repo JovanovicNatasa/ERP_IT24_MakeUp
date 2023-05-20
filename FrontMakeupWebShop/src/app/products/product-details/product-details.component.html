@@ -1,0 +1,34 @@
+<mat-divider></mat-divider>
+<mat-grid-list cols="4" rowHeight="200px">
+  <mat-grid-tile [colspan]="2" [rowspan]="2" class="photo-tile">
+    <img [src]="'assets/product-' + (product.proizvodId) + '.jpg'">
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="2" [rowspan]="2" class="details-tile">
+    <div class="details">
+      <h4>Kategorija: {{ product.tip.nazivTipa }}</h4>
+      <h3>{{ product.brend.nazivBrenda }} {{ product.kolekcija.nazivKolekcije }} {{ product.model }}</h3>
+      <mat-divider></mat-divider>
+      <div class="price-details">
+        <div class="price">{{ product.cenaPoKom | number:'1.2-2' }} RSD</div>
+        <div class="quantity">
+          <button mat-mini-fab color="accent" (click)="incrementQuantity()"><mat-icon>add</mat-icon></button>
+          <span>{{ quantity }}</span>
+          <button mat-mini-fab color="accent" (click)="decrementQuantity()"><mat-icon>remove</mat-icon></button>
+        </div>
+      </div>
+      <button mat-raised-button color="primary" class="add-to-cart-button">DODAJ U KORPU</button>
+      <mat-divider></mat-divider>
+      <div class="buttons">
+        <button class="pagination-button" [class.active]="activeTab === 'sastav'" (click)="setActiveTab('sastav')">SASTAV</button>
+        <button class="pagination-button" [class.active]="activeTab === 'nacinUpotrebe'" (click)="setActiveTab('nacinUpotrebe')">NAČIN UPOTREBE</button>
+      </div>
+      <div class="tab-content" *ngIf="activeTab === 'sastav'">
+        <p>{{ product.sastav }}</p>
+      </div>
+      <div class="tab-content" *ngIf="activeTab === 'nacinUpotrebe'">
+        <p>{{ product.nacinUpotrebe }}</p>
+      </div>
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>
+<div class="bottom-line"></div>

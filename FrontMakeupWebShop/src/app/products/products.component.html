@@ -1,0 +1,55 @@
+<mat-divider></mat-divider>
+<div class="banner-area" (mouseenter)="stopAutoScroll()" (mouseleave)="startAutoScroll()">
+  <a href="#" mat-mini-fab class="previous" color="basic" (click)="prevImage()">
+    <mat-icon>arrow_back_ios</mat-icon>
+  </a>
+  <div class="banner">
+    <img src="{{ getCurrentImage() }}" alt="Banner" width="1350" height="400">
+    <div class="paginator">
+      <div class="circle" *ngFor="let image of images; let i = index" [class.active]="i === activeImageIndex" (click)="goToImage(i)"></div>
+    </div>
+  </div>
+  <a href="#" mat-mini-fab class="next" color="basic" (click)="nextImage()">
+    <mat-icon>arrow_forward_ios</mat-icon>
+  </a>
+</div>
+<mat-divider></mat-divider>
+
+<button mat-fab extended class="sort-button" color="accent"  [matMenuTriggerFor]="menu" >
+  <mat-icon>sort</mat-icon>
+  Sortiraj
+</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item class="descending" (click)="sortProductsPrice('descending')">Cena rastuće (0 -> 100)</button>
+  <button mat-menu-item class="ascending" (click)="sortProductsPrice('ascending')">Cena opadajuće (100 -> 0)</button>
+</mat-menu>
+
+<div class="card-container">
+  <mat-card class="example-card" *ngFor="let product of filteredProizvod">
+    <img mat-card-image [src]="'assets/product-' + (product.proizvodId) + '.jpg'">
+    <mat-card-content>
+      <h3>{{ product.brend.nazivBrenda }} {{ product.kolekcija.nazivKolekcije }} {{ product.model }}</h3>
+      <h4>Kategorija: {{ product.tip.nazivTipa }}</h4>
+    </mat-card-content>
+    <mat-card-actions class="actions">
+      <a [routerLink]="['/Proizvod', product.proizvodId]">
+      <button mat-raised-button color="accent">PREGLED</button>
+      </a>
+      <div class="price">
+        {{ product.cenaPoKom | number:'1.2-2' }} RSD
+      </div>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+<div *ngIf="noMatchingProductsMessage" class="no-matching-products">
+  {{ noMatchingProductsMessage }}
+</div>
+
+<mat-paginator [length]="filteredFlag ? filteredProizvod.length : proizvod.length"
+              [pageSize]="10"
+              [pageSizeOptions]="[1, 10, 25, 100]"
+              aria-label="Select page">
+</mat-paginator>
+
+

@@ -1,0 +1,68 @@
+<mat-toolbar color="primary">
+  <div class="logo">
+    <a routerLink="/" (click)="clearFilters()">
+      <img src="/assets/logo1.png" alt="Pocetna strana" width="200" height="60">
+    </a>
+  </div>
+  <div class="search">
+      <div class="oval-textbox">
+        <input type="text" placeholder="Your text here..."
+        [(ngModel)]="searchText" (input)="onSearch()">
+      </div>
+      <a href="#" mat-mini-fab color="accent" (click)="onSearch()">
+        <mat-icon>search</mat-icon>
+      </a>
+  </div>
+  <div class="tools">
+    <div class="menu-container-category" style=" position: absolute;  margin-left: -60px;" (clickOutside)="clickedOutside('menu2')">
+      <a href="#" mat-mini-fab color="accent" class="menu-toggler"  (click)="toggleMenu('menu2')"> <mat-icon>category</mat-icon> </a>
+        <div class="menu-category" *ngIf="isMenuOpened('menu2')">
+          <div class="menu-item" *ngFor="let item of categoryItems">
+            <label>
+              <input type="checkbox" [(ngModel)]="item.selected">
+              {{ item.name }}
+            </label>
+          </div>
+          <button mat-button color="accent"  (click)="applyTypeFilters()">PRIMENI</button>
+        </div>
+    </div>
+    <a routerLink="/Korpa/1" mat-mini-fab color="accent">
+      <mat-icon>shopping_basket</mat-icon>
+    </a>
+    <a routerLink="/Korisnik/login" mat-mini-fab color="accent">
+      <mat-icon class="person">person</mat-icon>
+      <span>Prijavite se</span>
+    </a>
+  </div>
+</mat-toolbar>
+<mat-toolbar class="navigation">
+  <div class="tools">
+    <a href="#" mat-button class="navigation-button" (click)="filterByPurpose('Usne')">
+      USNE
+    </a>
+    <a href="#" mat-button class="navigation-button" (click)="filterByPurpose('Obrve')">
+      OBRVE
+    </a>
+    <a href="#" mat-button class="navigation-button" (click)="filterByPurpose('Oci')">
+      OČI
+    </a>
+    <a href="#" mat-button class="navigation-button" (click)="filterByPurpose('Lice')">
+      LICE
+    </a>
+    <a href="#" mat-button class="navigation-button" (click)="filterByPurpose('Makeup palete')">
+      MAKEUP PALETE
+    </a>
+    <div class="menu-container" (clickOutside)="clickedOutside('menu1')">
+      <a href="#" mat-button class="menu-toggler" style="font-weight: bold;" (click)="toggleMenu('menu1')"> BREND </a>
+      <div class="menu" *ngIf="isMenuOpened('menu1')">
+        <div class="menu-item" *ngFor="let item of menuItems">
+          <label>
+            <input type="checkbox" [(ngModel)]="item.selected">
+            {{ item.name }}
+          </label>
+        </div>
+        <button mat-raised-button color="accent" style="margin-left: 20px;" (click)="applyFilters()">PRIMENI FILTER</button>
+      </div>
+    </div>
+  </div>
+</mat-toolbar>

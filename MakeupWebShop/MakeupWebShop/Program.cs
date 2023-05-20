@@ -11,6 +11,7 @@ using System.Text;
 using Swashbuckle.AspNetCore.Filters;
 using Microsoft.Extensions.Options;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -28,6 +29,8 @@ builder.Services.AddSwaggerGen(options =>
      });
      options.OperationFilter<SecurityRequirementsOperationFilter>();
  });
+
+
 
 builder.Services.AddDbContext<MakeUpDbContext>();
 
@@ -51,18 +54,24 @@ builder.Services.AddControllers().AddJsonOptions(x =>
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
 
-builder.Services.AddAuthentication().AddJwtBearer(options=>
+builder.Services.AddCors(options =>
 {
-    options.TokenValidationParameters = new TokenValidationParameters
+    options.AddPolicy("angularApplication", builder =>
     {
-        ValidateIssuer = false,
-        ValidateAudience = false,
-        ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration.GetSection("AppSettings:Token").Value!))
-    };
+        builder.WithOrigins("http://localhost:4200")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+            /*.WithMethods("GET", "POST", "PUT", "DELETE")
+            .WithExposedHeaders("*");*/
     });
+});
+
 
 var app = builder.Build();
+
+
+app.UseCors("angularApplication");
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
