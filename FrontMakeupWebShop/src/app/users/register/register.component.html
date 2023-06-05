@@ -1,1 +1,59 @@
-<p>register works!</p>
+<div class="body">
+  <div class="main">
+    <div class="signup" >
+      <form (submit)="register(registerData)" [formGroup]="registerForm">
+        <label>Sign up</label>
+        <div class="input-group">
+          <input id="ime" formControlName="ime" type="text" name="ime" placeholder="Ime" required>
+          <mat-error *ngIf="registerForm.controls['ime'].touched && registerForm.controls['ime'].value === ''">
+            Ime is required.
+          </mat-error>
+          <input id="przime" formControlName="prezime" type="text" name="prezime" placeholder="Prezime" required>
+          <mat-error *ngIf="registerForm.controls['prezime'].touched && registerForm.controls['prezime'].value === ''">
+            Prezime is required.
+          </mat-error>
+        </div>
+        <div class="input-group">
+          <input id="email" formControlName="email" type="email" name="email" placeholder="Email" required>
+          <mat-error *ngIf="registerForm.controls['email'].invalid && registerForm.controls['email'].touched">{{getErrorMessage()}}</mat-error>
+          <input id="kontakt" formControlName="kontakt" type="text" name="kontakt" placeholder="Kontakt" required>
+          <mat-error *ngIf="registerForm.controls['kontakt'].touched && registerForm.controls['kontakt'].value === ''">
+            Kontakt is required.
+          </mat-error>
+        </div>
+        <div class="input-group">
+          <input id="username" formControlName="username" type="text" name="username" placeholder="Username" required>
+          <mat-error *ngIf="registerForm.controls['username'].touched && registerForm.controls['username'].value === ''">
+            Username is required.
+          </mat-error>
+          <input id="lozinka" formControlName="lozinka" type="password" name="lozinka" placeholder="Lozinka" required>
+          <mat-error *ngIf="registerForm.controls['lozinka'].touched && registerForm.controls['lozinka'].value === ''">
+            Lozinka is required.
+          </mat-error>
+        </div>
+        <div class="input-group">
+          <input id="grad" formControlName="grad" type="text" name="grad" placeholder="Grad" required>
+          <mat-error *ngIf="registerForm.controls['grad'].touched && registerForm.controls['grad'].value === ''">
+            Grad is required.
+          </mat-error>
+          <input id="ulica" formControlName="ulica" type="text" name="ulica" placeholder="Ulica" required>
+          <mat-error *ngIf="registerForm.controls['ulica'].touched && registerForm.controls['ulica'].value === ''">
+            Ulica is required.
+          </mat-error>
+        </div>
+        <div class="input-group">
+          <input id="broj" formControlName="broj" type="text" name="broj" placeholder="Broj" required>
+          <mat-error *ngIf="registerForm.controls['broj'].touched && registerForm.controls['broj'].value === ''">
+            Broj is required.
+          </mat-error>
+          <input id="postanskiBroj" formControlName="postanskiBroj" type="text" name="postanskiBroj" placeholder="Poštanski broj" required>
+          <mat-error *ngIf="registerForm.controls['postanskiBroj'].touched && registerForm.controls['postanskiBroj'].value === ''">
+            Poštanski broj is required.
+          </mat-error>
+        </div>
+        <button type="submit">Sign up</button>
+        <button mat-button class="login-button" routerLink="/Korisnik/login">Uloguj se</button>
+      </form>
+    </div>
+  </div>
+</div>

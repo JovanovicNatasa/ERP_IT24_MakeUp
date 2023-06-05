@@ -26,10 +26,14 @@
           <button mat-button color="accent"  (click)="applyTypeFilters()">PRIMENI</button>
         </div>
     </div>
-    <a routerLink="/Korpa/1" mat-mini-fab color="accent">
+    <a [routerLink]="'/Korpa/' + loginService.getKorpaId()" mat-mini-fab color="accent">
       <mat-icon>shopping_basket</mat-icon>
     </a>
-    <a routerLink="/Korisnik/login" mat-mini-fab color="accent">
+    <a *ngIf="isLoggedIn()" routerLink="/Korisnik/login" mat-fab extended color="accent" class="user">
+      <mat-icon class="person">person</mat-icon>
+      {{ getUsername() }}
+    </a>
+    <a *ngIf="!isLoggedIn()" routerLink="/Korisnik/login" mat-fab extended color="accent" class="prijavi">
       <mat-icon class="person">person</mat-icon>
       <span>Prijavite se</span>
     </a>

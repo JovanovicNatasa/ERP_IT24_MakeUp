@@ -2,6 +2,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FilterService } from 'src/app/filter.service';
 import { SearchService } from 'src/app/search/serach-s.service';
+import { LoginService } from 'src/app/users/login/login.service';
 
 
 @Component({
@@ -34,7 +35,16 @@ export class TopNavComponent {
   ];
 
 
-  constructor(private searchService: SearchService,private filterService: FilterService) { }
+  constructor(private searchService: SearchService,private filterService: FilterService,
+    public loginService: LoginService ) { }
+
+    isLoggedIn(): boolean {
+      return this.loginService.getLoggedIn();
+    }
+
+    getUsername(): string {
+      return this.loginService.getUsername();
+    }
 
   ngOnInit(): void {
     this.searchService.searchText$.subscribe((searchText: string) => {

@@ -41,7 +41,7 @@ namespace MakeupWebShop.Controllers
             var brandDto = mapper.Map<Models.DTO.Brend>(brandEntity);
             return Ok(brandDto);
         }
-        [HttpPost, Authorize(Roles = "Admin")]
+        [HttpPost] //, Authorize(Roles = "Admin")
         public async Task<IActionResult> AddBrandAsync(Models.DTO.AddBrendRequest addBrendRequest)
         {
             //Request(DTO) to entity model

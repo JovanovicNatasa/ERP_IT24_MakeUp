@@ -1,0 +1,87 @@
+<div class="add-proizvod-wrap">
+  <div class="add-proizvod-html">
+    <input id="tab-1" type="radio" name="tab" class="sign-in" checked>
+    <label for="tab-1" class="tab">Dodavanje proizvoda</label>
+    <div class="add-proizvod-form" [formGroup]="addProizvodForm" (ngSubmit)="addProizvod()">
+      <div class="sign-in-html">
+        <div class="group">
+
+          <mat-form-field appearance="fill">
+            <mat-label>Brend</mat-label>
+            <mat-select formControlName="idbrenda" id="idbrenda">
+              <mat-option *ngFor="let brend of brendovi" [value]="brend.brendId">
+                {{ brend.nazivBrenda }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Namena</mat-label>
+            <mat-select formControlName="idnamene" id="idnamene">
+              <mat-option *ngFor="let namena of namene" [value]="namena.namenaId">
+                {{ namena.nazivNamene }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Tip</mat-label>
+            <mat-select formControlName="tipId" id="tipId">
+              <mat-option *ngFor="let tip of tipovi" [value]="tip.tipId">{{ tip.nazivTipa }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Kolekcija</mat-label>
+            <mat-select formControlName="idkolekcije" id="idkolekcije">
+              <mat-option *ngFor="let kolekcija of kolekcije" [value]="kolekcija.kolekcijaId">
+                {{ kolekcija.nazivKolekcije }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+        </div>
+        <div class="group">
+          <label for="model" class="label">model</label>
+          <input id="model" type="text" class="input" formControlName="model">
+          <mat-error *ngIf="addProizvodForm.controls['model'].touched && addProizvodForm.controls['model'].value === ''">
+            model is required.
+          </mat-error>
+        </div>
+        <div class="group">
+          <label for="cenaPoKom" class="label">cena po kom</label>
+          <input id="cenaPoKom" type="text" class="input" formControlName="cenaPoKom">
+          <mat-error *ngIf="addProizvodForm.controls['cenaPoKom'].touched && addProizvodForm.controls['cenaPoKom'].value === ''">
+            cena po kom is required.
+          </mat-error>
+        </div>
+        <div class="group">
+          <label for="kolicinaNaStanju" class="label">kolicina na stanju</label>
+          <input id="kolicinaNaStanju" type="text" class="input" formControlName="kolicinaNaStanju">
+          <mat-error *ngIf="addProizvodForm.controls['kolicinaNaStanju'].touched && addProizvodForm.controls['kolicinaNaStanju'].value === ''">
+            kolicina na stanju is required.
+          </mat-error>
+        </div>
+        <div class="group">
+          <label for="nacinUpotrebe" class="label">Način upotrebe</label>
+          <input id="nacinUpotrebe" type="text" class="input" formControlName="nacinUpotrebe">
+          <mat-error *ngIf="addProizvodForm.controls['nacinUpotrebe'].touched && addProizvodForm.controls['nacinUpotrebe'].value === ''">
+            Način upotrebe is required.
+          </mat-error>
+        </div>
+        <div class="group">
+          <label for="sastav" class="label">Sastav</label>
+          <input id="sastav" type="text" class="input" formControlName="sastav">
+          <mat-error *ngIf="addProizvodForm.controls['sastav'].touched && addProizvodForm.controls['sastav'].value === ''">
+            Sastav is required.
+          </mat-error>
+        </div>
+
+        <div class="group" (click)="addProizvod()">
+          <input type="submit" class="button" value="Dodaj">
+        </div>
+        <div class="hr"></div>
+
+      </div>
+    </div>
+  </div>
+</div>

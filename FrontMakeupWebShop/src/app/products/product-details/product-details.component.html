@@ -16,7 +16,7 @@
           <button mat-mini-fab color="accent" (click)="decrementQuantity()"><mat-icon>remove</mat-icon></button>
         </div>
       </div>
-      <button mat-raised-button color="primary" class="add-to-cart-button">DODAJ U KORPU</button>
+      <button mat-raised-button color="primary" class="add-to-cart-button" (click)="addToCart()">DODAJ U KORPU</button>
       <mat-divider></mat-divider>
       <div class="buttons">
         <button class="pagination-button" [class.active]="activeTab === 'sastav'" (click)="setActiveTab('sastav')">SASTAV</button>

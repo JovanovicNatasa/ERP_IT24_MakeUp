@@ -1,0 +1,23 @@
+<div class="add-tip-wrap">
+  <div class="add-tip-html">
+    <input id="tab-1" type="radio" name="tab" class="sign-in" checked>
+    <label for="tab-1" class="tab">Dodavanje tipa</label>
+    <div class="add-tip-form" [formGroup]="addTypeForm">
+      <div class="sign-in-html">
+        <div class="group">
+          <label for="nazivTipa" class="label">Naziv Tipa</label>
+          <input id="nazivTipa" type="text" class="input" formControlName="nazivTipa">
+          <mat-error *ngIf="addTypeForm.controls['nazivTipa'].touched && addTypeForm.controls['nazivTipa'].value === ''">
+            Name of brand is required.
+          </mat-error>
+        </div>
+
+        <div class="group" (click)="addTip()">
+          <input type="submit" class="button" value="Dodaj">
+        </div>
+        <div class="hr"></div>
+
+      </div>
+    </div>
+  </div>
+</div>

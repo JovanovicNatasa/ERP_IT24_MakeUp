@@ -56,21 +56,44 @@ namespace MakeupWebShop.Controllers
             return Ok(userDto);
         }
         //public static TblKorisnik userRegistred = new Db.TblKorisnik();
-       [HttpPost("register")]
+
+
+
+        [HttpGet]
+        //[Authorize(Roles = "Admin, User")]
+        [Route("username/{username}")]
+        public async Task<IActionResult> GetUserByUsernameAsync(string username)
+        {
+            var userEntity = await korisnikRepository.GetByUsernameAsync(username);
+
+            if (userEntity == null)
+            {
+                return NotFound("There is no user with this username.");
+            }
+
+            var userDto = mapper.Map<Models.DTO.Korisnik>(userEntity);
+            return Ok(userDto);
+        }
+
+
+        [HttpPost("register")]
         public async Task<IActionResult> AddUserAsync(Models.DTO.AddKorisnikRequest addKorisnikRequest)
         {
             string hashLozinka = BCrypt.Net.BCrypt.HashPassword(addKorisnikRequest.Lozinka);
             // Check if the address already exists
             TblAdresa adresa = await adresaRepository.GetAdresaByDetailsAsync(addKorisnikRequest);
 
+            Random random = new Random();
+            int randomId = random.Next(1000000);
+
 
             //Request(DTO) to entity model
             var userEntity = new Db.TblKorisnik()
             {
-                KorisnikId= addKorisnikRequest.KorisnikId,
+                KorisnikId= randomId,
                 Ime = addKorisnikRequest.Ime,
                 Prezime = addKorisnikRequest.Prezime,
-                Jmbg = addKorisnikRequest.Jmbg,
+                Jmbg = "jmbg000000000",
                 Email = addKorisnikRequest.Email,
                 Kontakt = addKorisnikRequest.Kontakt,
                 Username = addKorisnikRequest.Username,
@@ -141,7 +164,7 @@ namespace MakeupWebShop.Controllers
             {
                 Ime = updateKorisnikRequest.Ime,
                 Prezime = updateKorisnikRequest.Prezime,
-                Jmbg = updateKorisnikRequest.Jmbg,
+                Jmbg = "jmbg000000000",
                 Email = updateKorisnikRequest.Email,
                 Kontakt = updateKorisnikRequest.Kontakt,
                 Username = updateKorisnikRequest.Username,

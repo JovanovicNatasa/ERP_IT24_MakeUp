@@ -75,7 +75,6 @@ namespace MakeupWebShop.Controllers
                 KorpaId = addProizvodUKorpiRequest.KorpaId,
 
             };
-            
            
             //pass details to Repository
             productInShoppingCartEntity = await proizvodUKorpiRepository.AddAsync(productInShoppingCartEntity);

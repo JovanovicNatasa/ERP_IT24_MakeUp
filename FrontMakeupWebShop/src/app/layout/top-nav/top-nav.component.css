@@ -24,11 +24,11 @@
 .mat-icon{
   align-self: center;
 }
-.person{
+/*.person{
   margin-right: 3px;
   margin-left: 8px;
 
-}
+}*/
 .search{
   display: inline-block;
   display: flex;
@@ -104,6 +104,19 @@
 }
 .menu-item:hover{
   text-decoration: underline;
+}
+.user{
+
+  width: 125px;
+  height: 40px;
+  border-radius: 50px;
+}
+.prijavi{
+  padding-top: -250px;
+  width: 125px;
+  height: 40px;
+  border-radius: 50px;
+  text-align: center;
 }
 
 

@@ -1,0 +1,23 @@
+<div class="add-namena-wrap">
+  <div class="add-namena-html">
+    <input id="tab-1" type="radio" name="tab" class="sign-in" checked>
+    <label for="tab-1" class="tab">Dodavanje namena</label>
+    <div class="add-namena-form" [formGroup]="addPurposeForm">
+      <div class="sign-in-html">
+        <div class="group">
+          <label for="nazivNamene" class="label">Naziv Namene</label>
+          <input id="nazivNamene" type="text" class="input" formControlName="nazivNamene">
+          <mat-error *ngIf="addPurposeForm.controls['nazivNamene'].touched && addPurposeForm.controls['nazivNamene'].value === ''">
+            Name of brand is required.
+          </mat-error>
+        </div>
+
+        <div class="group" (click)="addNamena()">
+          <input type="submit" class="button" value="Dodaj">
+        </div>
+        <div class="hr"></div>
+
+      </div>
+    </div>
+  </div>
+</div>

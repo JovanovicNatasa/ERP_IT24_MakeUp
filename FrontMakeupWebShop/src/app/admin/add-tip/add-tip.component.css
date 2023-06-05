@@ -1,0 +1,150 @@
+body{
+	margin:0;
+  font-family: 'Jost', sans-serif;
+
+}
+*,:after,:before{box-sizing:border-box}
+.clearfix:after,.clearfix:before{content:'';display:table}
+.clearfix:after{clear:both;display:block}
+a{color:inherit;text-decoration:none}
+
+.add-tip-wrap{
+	width:100%;
+	margin:auto;
+	min-height:1020px;
+	position:relative;
+	background: linear-gradient(to top, #0f0c29, #302b63, #673AB7);
+}
+.add-tip-html{
+	width:100%;
+	height:100%;
+	position:absolute;
+	padding:90px 70px 50px 70px;
+}
+.add-tip-html .sign-in-htm{
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+	position:absolute;
+	transform:rotateY(180deg);
+	backface-visibility:hidden;
+	transition:all .4s linear;
+
+}
+.add-tip-html .sign-in,
+.add-tip-form .group .check{
+	display:none;
+
+}
+.add-tip-html .tab,
+.add-tip-form .group .label,
+.add-tip-form .group .button{
+	text-transform:uppercase;
+
+
+}
+.add-tip-html .tab{
+	font-size:22px;
+	margin-right:15px;
+	padding-bottom:5px;
+	margin:0 15px 10px 0;
+	display:inline-block;
+	border-bottom:2px solid transparent;
+}
+.add-tip-html .sign-in:checked + .tab{
+	color:#fff;
+	border-color:#FFD740;
+}
+.add-tip-form{
+	min-height:345px;
+	position:relative;
+	perspective:1000px;
+	transform-style:preserve-3d;
+}
+.add-tip-form .group {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+  margin-bottom: 20px;
+}
+.add-tip-form .group .label,
+.add-tip-form .group .input,
+.add-tip-form .group .button{
+	width:100%;
+	color:#fff;
+	display:block;
+
+}
+.add-tip-form .group .input,
+.add-tip-form .group .button{
+	border:none;
+	padding:15px 20px;
+	border-radius:25px;
+	background:rgba(255,255,255,.1);
+
+}
+
+.add-tip-form .group .label{
+	color:#FFD740;
+	font-size:12px;
+}
+.add-tip-form .group .button{
+	background:#FFD740;
+}
+.add-tip-form .group label .icon{
+	width:15px;
+	height:15px;
+	border-radius:2px;
+	position:relative;
+	display:inline-block;
+	background:rgba(255,255,255,.1);
+}
+.add-tip-form .group label .icon:before,
+.add-tip-form .group label .icon:after{
+	content:'';
+	width:10px;
+	height:2px;
+	background:#fff;
+	position:absolute;
+	transition:all .2s ease-in-out 0s;
+}
+.add-tip-form .group label .icon:before{
+	left:3px;
+	width:5px;
+	bottom:6px;
+	transform:scale(0) rotate(0);
+}
+.add-tip-form .group label .icon:after{
+	top:6px;
+	right:0;
+	transform:scale(0) rotate(0);
+}
+.add-tip-form .group .check:checked + label{
+	color:#fff;
+}
+.add-tip-form .group .check:checked + label .icon{
+	background:#FFD740;
+}
+.add-tip-form .group .check:checked + label .icon:before{
+	transform:scale(1) rotate(45deg);
+}
+.add-tip-form .group .check:checked + label .icon:after{
+	transform:scale(1) rotate(-45deg);
+}
+.add-tip-html .sign-in:checked + .tab + .sign-up + .tab + .add-tip-form .sign-in-htm{
+	transform:rotate(0);
+}
+.add-tip-html .sign-up:checked + .tab + .add-tip-form .sign-up-htm{
+	transform:rotate(0);
+}
+
+.hr{
+	height:2px;
+	margin:60px 0 50px 0;
+	background:rgba(255,255,255,.2);
+}
+.foot-lnk{
+	text-align:center;
+}
+

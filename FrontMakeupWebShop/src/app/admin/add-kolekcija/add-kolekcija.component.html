@@ -1,0 +1,23 @@
+<div class="add-kolekcija-wrap">
+  <div class="add-kolekcija-html">
+    <input id="tab-1" type="radio" name="tab" class="sign-in" checked>
+    <label for="tab-1" class="tab">Dodavanje kolekcija</label>
+    <div class="add-kolekcija-form" [formGroup]="addCollectionForm">
+      <div class="sign-in-html">
+        <div class="group">
+          <label for="nazivKolekcije" class="label">Naziv Kolekcije</label>
+          <input id="nazivKolekcije" type="text" class="input" formControlName="nazivKolekcije">
+          <mat-error *ngIf="addCollectionForm.controls['nazivKolekcije'].touched && addCollectionForm.controls['nazivKolekcije'].value === ''">
+            Name of brand is required.
+          </mat-error>
+        </div>
+
+        <div class="group" (click)="addKolekcija()">
+          <input type="submit" class="button" value="Dodaj">
+        </div>
+        <div class="hr"></div>
+
+      </div>
+    </div>
+  </div>
+</div>

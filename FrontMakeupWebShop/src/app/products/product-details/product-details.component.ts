@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../product.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ProductDetailsService } from './product-details.service';
+import { LoginService } from 'src/app/users/login/login.service';
 
 @Component({
   selector: 'app-product-details',
@@ -14,7 +16,10 @@ export class ProductDetailsComponent implements OnInit {
 
   constructor(
     private readonly productService: ProductService,
-    private readonly route: ActivatedRoute
+    private readonly route: ActivatedRoute,
+    private readonly router: Router,
+    private readonly productDetailsService:ProductDetailsService,
+    private readonly loginService: LoginService // Inject the LoginService
   ) {}
 
   ngOnInit(): void {
@@ -46,5 +51,25 @@ export class ProductDetailsComponent implements OnInit {
     if (this.quantity > 1) {
       this.quantity--;
     }
+  }
+
+  addToCart(): void {
+    const addProizvodUKorpiRequest = {
+      BrojKomada: this.quantity,
+      ProizvodId: this.product.proizvodId,
+      KorpaId: this.loginService.getKorpaId()
+    };
+
+    this.productDetailsService.addProductInShoppingCart(addProizvodUKorpiRequest)
+      .subscribe(
+        (successResponse) => {
+          // Handle success response if needed
+          console.log("Product added to shopping cart:", successResponse);
+        },
+        (errorResponse) => {
+          // Handle error response if needed
+          console.error("Error adding product to shopping cart:", errorResponse);
+        }
+      );
   }
 }
