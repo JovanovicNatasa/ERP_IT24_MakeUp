@@ -25,13 +25,13 @@ export class Address {
   grad: string;
   ulica: string;
   broj: string;
-  postanskiBroj: string;
+  postanskiBroj: number;
 
   constructor() {
     this.adresaId = 0;
     this.grad = '';
     this.ulica = '';
     this.broj = '';
-    this.postanskiBroj = '';
+    this.postanskiBroj = 0;
   }
 }

@@ -44,11 +44,21 @@ namespace MakeupWebShop.Repositories
             return await makeUpDbContext.TblProizvodUkorpis.Include(x => x.Proizvod).Include(x => x.Korpa).ToListAsync();
         }
 
-        public async Task<TblProizvodUkorpi> GetByKorpaIdAsync(int korpaId)
+        public async Task<IEnumerable<TblProizvodUkorpi>> GetByKorpaIdAsync(int korpaId)
         {
-            return await makeUpDbContext.TblProizvodUkorpis.Include(x => x.Proizvod).Include(x => x.Korpa)
-               .FirstOrDefaultAsync(x => x.KorpaId == korpaId);
+            return await makeUpDbContext.TblProizvodUkorpis
+                .Include(x => x.Proizvod)
+                    .ThenInclude(p => p.Brend)
+                .Include(x => x.Proizvod)
+                    .ThenInclude(p => p.Namena)
+                .Include(x => x.Proizvod)
+                    .ThenInclude(p => p.Tip)
+                .Include(x => x.Proizvod)
+                    .ThenInclude(p => p.Kolekcija)
+                .Where(x => x.KorpaId == korpaId)
+                .ToListAsync();
         }
+
 
         public async Task<TblProizvodUkorpi> GetByIdAsync(int id)
         {

@@ -8,7 +8,7 @@
 
           <mat-form-field appearance="fill">
             <mat-label>Brend</mat-label>
-            <mat-select formControlName="idbrenda" id="idbrenda">
+            <mat-select formControlName="brendId" id="brendId">
               <mat-option *ngFor="let brend of brendovi" [value]="brend.brendId">
                 {{ brend.nazivBrenda }}
               </mat-option>
@@ -16,7 +16,7 @@
           </mat-form-field>
           <mat-form-field appearance="fill">
             <mat-label>Namena</mat-label>
-            <mat-select formControlName="idnamene" id="idnamene">
+            <mat-select formControlName="namenaId" id="namenaId">
               <mat-option *ngFor="let namena of namene" [value]="namena.namenaId">
                 {{ namena.nazivNamene }}
               </mat-option>
@@ -32,9 +32,8 @@
 
           <mat-form-field appearance="fill">
             <mat-label>Kolekcija</mat-label>
-            <mat-select formControlName="idkolekcije" id="idkolekcije">
-              <mat-option *ngFor="let kolekcija of kolekcije" [value]="kolekcija.kolekcijaId">
-                {{ kolekcija.nazivKolekcije }}
+            <mat-select formControlName="kolekcijaId" id="kolekcijaId">
+              <mat-option *ngFor="let kolekcija of kolekcije" [value]="kolekcija.kolekcijaId">{{ kolekcija.nazivKolekcije }}
               </mat-option>
             </mat-select>
           </mat-form-field>

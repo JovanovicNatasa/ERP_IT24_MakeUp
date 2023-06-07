@@ -32,11 +32,11 @@
       <h4>Kategorija: {{ product.tip.nazivTipa }}</h4>
     </mat-card-content>
     <mat-card-actions class="actions">
-      <a [routerLink]="['/Proizvod', product.proizvodId]">
+      <a  [routerLink]="['/Proizvod', product.proizvodId]">
       <button mat-raised-button color="accent">PREGLED</button>
       </a>
       <div class="price">
-        {{ product.cenaPoKom | number:'1.2-2' }} RSD
+        {{ product?.cenaPoKom | number:'1.2-2' }} RSD
       </div>
     </mat-card-actions>
   </mat-card>

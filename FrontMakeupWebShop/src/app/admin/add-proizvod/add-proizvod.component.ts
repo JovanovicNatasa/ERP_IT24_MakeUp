@@ -132,7 +132,7 @@ export class AddProizvodComponent implements OnInit {
       namenaId: this.addProizvodForm.value.namenaId,
       tipId: this.addProizvodForm.value.tipId,
       kolicinaNaStanju: this.addProizvodForm.value.kolicinaNaStanju,
-	  model: this.addProizvodForm.value.model,
+	    model: this.addProizvodForm.value.model,
       sastav: this.addProizvodForm.value.sastav,
       nacinUpotrebe: this.addProizvodForm.value.nacinUpotrebe,
     };

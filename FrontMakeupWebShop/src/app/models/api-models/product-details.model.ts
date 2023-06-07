@@ -1,5 +1,8 @@
+import { Product } from "./product.model";
+import { ShoppingCart } from "./shopping-basket.model";
+
 export interface ProductDetails {
-  BrojKomada: number;
-  ProizvodId: number;
-  KorpaId: number;
+  brojKomada: number,
+  proizvodId: number,
+  korpaId: number,
 }

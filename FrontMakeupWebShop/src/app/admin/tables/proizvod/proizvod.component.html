@@ -1,0 +1,68 @@
+<div class="page-header">
+  <div class="container">
+    <h1>Proizvod</h1>
+
+
+  </div>
+</div>
+<hr>
+<button mat-raised-button class="dugme" onclick="window.location.href='Proizvodadd'" color="primary">Dodaj</button>
+  <hr>
+<div class="container mat-elevation-z8">
+  <table mat-table matSort [dataSource]="dataSource" class="">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- proizvodjac Column -->
+    <ng-container matColumnDef="nazivNamene">
+      <th mat-header-cell *matHeaderCellDef > Kategorija </th>
+      <td mat-cell *matCellDef="let element"> {{element.namena.nazivNamene}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="nazivBrenda">
+      <th mat-header-cell *matHeaderCellDef> Brend </th>
+      <td mat-cell *matCellDef="let element"> {{element.brend.nazivBrenda}}</td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="nazivKolekcije">
+      <th mat-header-cell *matHeaderCellDef> Kolekcija </th>
+      <td mat-cell *matCellDef="let element"> {{element.kolekcija.nazivKolekcije}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="model">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Model </th>
+      <td mat-cell *matCellDef="let element"> {{element.model}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="nazivTipa">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Tip </th>
+      <td mat-cell *matCellDef="let element"> {{element.tip.nazivTipa}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="cena">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Cena </th>
+      <td mat-cell *matCellDef="let element"> {{element.cenaPoKom}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="kolicinaNaStanju">
+      <th mat-header-cell *matHeaderCellDef> Kolicina na stanju </th>
+      <td mat-cell *matCellDef="let element"> {{element.kolicinaNaStanju}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [length]="100"
+              [pageSize]="10"
+              [pageSizeOptions]="[5, 10, 25, 100]"
+              aria-label="Select page">
+</mat-paginator>
+
+
+
+</div>

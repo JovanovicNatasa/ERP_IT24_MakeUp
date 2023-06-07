@@ -64,8 +64,20 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
+    // Assign the form values to the registerData object
+    this.registerData.ime = this.registerForm.value.ime;
+    this.registerData.prezime = this.registerForm.value.prezime;
+    this.registerData.email = this.registerForm.value.email;
+    this.registerData.kontakt = this.registerForm.value.kontakt;
+    this.registerData.username = this.registerForm.value.username;
+    this.registerData.lozinka = this.registerForm.value.lozinka;
+    this.registerData.adresa.grad = this.registerForm.value.grad;
+    this.registerData.adresa.ulica = this.registerForm.value.ulica;
+    this.registerData.adresa.broj = this.registerForm.value.broj;
+    this.registerData.adresa.postanskiBroj = this.registerForm.value.postanskiBroj;
+
     // Assuming that the `registerUser` method of `RegisterService` returns an Observable
-    this.registerService.registerUser(registerData).subscribe(
+    this.registerService.registerUser(this.registerData).subscribe(
       (response: any) => {
         // Handle successful registration
         console.log("Registration successful:", response);

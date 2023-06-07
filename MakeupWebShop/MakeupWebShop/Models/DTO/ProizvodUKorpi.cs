@@ -11,6 +11,8 @@ namespace MakeupWebShop.Models.DTO
         public int ProizvodId { get; set; }
 
         public int KorpaId { get; set; }
+
+
         public virtual TblKorpa Korpa { get; set; } = null!;
 
         public virtual TblProizvod Proizvod { get; set; } = null!;

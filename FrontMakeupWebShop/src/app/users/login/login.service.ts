@@ -107,11 +107,14 @@ export class LoginService {
     return this.korisnikId;
   }
 
-  logout() {
+  logout(): void {
+    console.log('Logout method called');
     this.cookieService.delete('token');
     this.clearLocalStorage();
     this.clearKorisnikId();
-    }
+    this.setLoggedIn(false); // Set isLoggedInBool to false
+  }
+
 
   private clearLocalStorage() {
     localStorage.removeItem('id_token');
@@ -137,4 +140,3 @@ export class AuthInterceptor implements HttpInterceptor {
     return next.handle(request);
   }
 }
-

@@ -11,9 +11,9 @@
       <div class="price-details">
         <div class="price">{{ product.cenaPoKom | number:'1.2-2' }} RSD</div>
         <div class="quantity">
-          <button mat-mini-fab color="accent" (click)="incrementQuantity()"><mat-icon>add</mat-icon></button>
-          <span>{{ quantity }}</span>
           <button mat-mini-fab color="accent" (click)="decrementQuantity()"><mat-icon>remove</mat-icon></button>
+          <span>{{ quantity }}</span>
+          <button mat-mini-fab color="accent" (click)="incrementQuantity()"><mat-icon>add</mat-icon></button>
         </div>
       </div>
       <button mat-raised-button color="primary" class="add-to-cart-button" (click)="addToCart()">DODAJ U KORPU</button>

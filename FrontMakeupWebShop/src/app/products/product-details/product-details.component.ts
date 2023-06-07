@@ -3,6 +3,7 @@ import { ProductService } from '../product.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductDetailsService } from './product-details.service';
 import { LoginService } from 'src/app/users/login/login.service';
+import { Product } from 'src/app/models/api-models/product.model';
 
 @Component({
   selector: 'app-product-details',
@@ -10,7 +11,8 @@ import { LoginService } from 'src/app/users/login/login.service';
   styleUrls: ['./product-details.component.css']
 })
 export class ProductDetailsComponent implements OnInit {
-  product: any;
+
+  product!: Product;
   activeTab: string = 'sastav';
   quantity: number = 1;
 
@@ -31,6 +33,8 @@ export class ProductDetailsComponent implements OnInit {
           .subscribe(
             (successResponse) => {
               this.product = successResponse;
+            },(errorResponse)=>{
+              console.log(errorResponse);
             }
           );
       }
@@ -41,7 +45,7 @@ export class ProductDetailsComponent implements OnInit {
     this.activeTab = tab;
   }
 
-  incrementQuantity(): void {
+ /* incrementQuantity(): void {
     if (this.quantity < this.product.kolicinaNaStanju) {
       this.quantity++;
     }
@@ -51,13 +55,20 @@ export class ProductDetailsComponent implements OnInit {
     if (this.quantity > 1) {
       this.quantity--;
     }
+  }*/
+  incrementQuantity(): void {
+    this.quantity = this.productDetailsService.incrementQuantity(this.quantity);
+  }
+
+  decrementQuantity(): void {
+    this.quantity = this.productDetailsService.decrementQuantity(this.quantity);
   }
 
   addToCart(): void {
     const addProizvodUKorpiRequest = {
-      BrojKomada: this.quantity,
-      ProizvodId: this.product.proizvodId,
-      KorpaId: this.loginService.getKorpaId()
+      brojKomada: this.quantity,
+      proizvodId: this.product.proizvodId,
+      korpaId: this.loginService.getKorpaId()
     };
 
     this.productDetailsService.addProductInShoppingCart(addProizvodUKorpiRequest)

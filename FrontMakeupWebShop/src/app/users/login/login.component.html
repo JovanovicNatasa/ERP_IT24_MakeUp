@@ -3,7 +3,7 @@
   <div class="main">
 
     <div class="login">
-      <form class="login-form" [formGroup]="loginForm" (submit)="login()">
+      <form class="login-form" [formGroup]="loginForm" >
         <label>Login</label>
         <div class="input-group">
           <input type="text" id="username" formControlName="username"  placeholder="Username required">
@@ -15,7 +15,7 @@
             Lozinka is required.
           </mat-error>
         </div>
-        <button type="submit" [disabled]="loginForm.invalid">Login</button>
+        <button type="submit" [disabled]="loginForm.invalid"  (click)="login()">Login</button>
         <button mat-button class="register-button" routerLink="/Korisnik/register">Registrujte se</button>
         <button mat-button class="register-button" (click)="logout()" >Log out</button>
       </form>

@@ -43,7 +43,7 @@ namespace MakeupWebShop.Controllers
             var productDto = mapper.Map<Models.DTO.Proizvod>(productEntity);
             return Ok(productDto);
         }
-        [HttpPost, Authorize(Roles = "Admin")]
+        [HttpPost] //, Authorize(Roles = "Admin")
         public async Task<IActionResult> AddProductAsync(Models.DTO.AddProizvodRequest addProizvodRequest)
         {
             //Request(DTO) to entity model
@@ -62,7 +62,6 @@ namespace MakeupWebShop.Controllers
             };
             //pass details to Repository
             productEntity = await proizvodRepository.AddAsync(productEntity);
-
             //Conwert back to DTO
             var productDto = mapper.Map<Models.DTO.Proizvod>(productEntity);
             /*

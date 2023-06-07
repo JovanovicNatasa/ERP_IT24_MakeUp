@@ -8,7 +8,7 @@ namespace MakeupWebShop.Repositories
     {
         public Task<IEnumerable<TblProizvodUkorpi>> GetAllAsync();
         Task<TblProizvodUkorpi> GetByIdAsync(int id);
-        Task<TblProizvodUkorpi> GetByKorpaIdAsync(int korpaId);
+        Task<IEnumerable<TblProizvodUkorpi>> GetByKorpaIdAsync(int korpaId);
 
         Task<TblProizvodUkorpi> AddAsync(TblProizvodUkorpi tblProizvodUkorpi);
 

@@ -54,7 +54,7 @@ namespace MakeupWebShop.Controllers
             return Ok(purposeDTO);
         }
 
-        [HttpPost, Authorize(Roles = "Admin")]
+        [HttpPost] //, Authorize(Roles = "Admin")
         public async Task<IActionResult> AddPurposeDTOAsync(Models.DTO.AddNamenaRequest addNamenaRequest)
         {
             var purpose = new Db.TblNamena()

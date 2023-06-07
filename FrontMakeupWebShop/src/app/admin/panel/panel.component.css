@@ -1,0 +1,30 @@
+.dashboard{
+  padding: 50px ;
+}
+.naslov
+{
+
+  text-align: center;
+  justify-content: center;
+
+
+}
+.button-div{
+
+  padding: 10px;
+  text-align: center;
+  justify-content: center;
+
+}
+.proizvod,
+.brend,
+.namena,
+.kolekcija,
+.tip{
+  width: 150px;
+  height: 100px;
+  margin-left: 25px;
+  margin-left: 25px;
+  margin-top: 25px;
+
+}

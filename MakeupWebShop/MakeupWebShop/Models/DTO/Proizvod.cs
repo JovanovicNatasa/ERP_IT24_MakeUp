@@ -23,8 +23,14 @@ namespace MakeupWebShop.Models.DTO
         public int TipId { get; set; }
         public int KolekcijaId { get; set; }
         public virtual TblBrend Brend { get; set; } = null!;
+
+
         public virtual TblKolekcija Kolekcija { get; set; } = null!;
+
         public virtual TblNamena Namena { get; set; } = null!;
+
+        public virtual ICollection<TblProizvodUkorpi> TblProizvodUkorpis { get; } = new List<TblProizvodUkorpi>();
+
         public virtual TblTip Tip { get; set; } = null!;
 
     }

@@ -41,7 +41,7 @@ namespace MakeupWebShop.Controllers
             var typeDto = mapper.Map<Models.DTO.Tip>(typeEntity);
             return Ok(typeDto);
         }
-        [HttpPost, Authorize(Roles = "Admin")]
+        [HttpPost] //, Authorize(Roles = "Admin")
         public async Task<IActionResult> AddTypeAsync(Models.DTO.AddTipRequest addTipRequest)
         {
             //Request(DTO) to entity model

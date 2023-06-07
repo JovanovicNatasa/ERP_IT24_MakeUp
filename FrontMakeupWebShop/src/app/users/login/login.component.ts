@@ -67,7 +67,9 @@ export class LoginComponent implements OnInit {
   }
 
   logout() {
+    console.log('Logout button clicked');
     this.loginService.logout(); // Call the logout() method from the LoginServiceService
+    this.token = ''; // Clear the token variable in the component
   }
 
 
@@ -108,5 +110,3 @@ export class LoginComponent implements OnInit {
     });
   }
 }
-
-

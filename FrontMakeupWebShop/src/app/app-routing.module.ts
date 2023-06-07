@@ -10,6 +10,12 @@ import { AddKolekcijaComponent } from './admin/add-kolekcija/add-kolekcija.compo
 import { AddNamenaComponent } from './admin/add-namena/add-namena.component';
 import { AddTipComponent } from './admin/add-tip/add-tip.component';
 import { AddProizvodComponent } from './admin/add-proizvod/add-proizvod.component';
+import { PanelComponent } from './admin/panel/panel.component';
+import { ProizvodComponent } from './admin/tables/proizvod/proizvod.component';
+import { BrendComponent } from './admin/tables/brend/brend.component';
+import { TipComponent } from './admin/tables/tip/tip.component';
+import { NamenaComponent } from './admin/tables/namena/namena.component';
+import { KolekcijaComponent } from './admin/tables/kolekcija/kolekcija.component';
 
 const routes: Routes = [
   {
@@ -53,7 +59,33 @@ const routes: Routes = [
   {
     path:'Proizvodadd',
     component:AddProizvodComponent
+  },
+  {
+    path:'Admin-panel',
+    component:PanelComponent
+  },
+  {
+    path:'Pregled-proizvoda',
+    component:ProizvodComponent
+  },
+  {
+    path:'Pregled-brenda',
+    component:BrendComponent
+  },
+  {
+    path:'Pregled-tipa',
+    component:TipComponent
+  },
+
+  {
+    path:'api/Pregled-namene',
+    component:NamenaComponent
+  },
+  {
+    path:'Pregled-kolekcije',
+    component:KolekcijaComponent
   }
+
 
 ];
 

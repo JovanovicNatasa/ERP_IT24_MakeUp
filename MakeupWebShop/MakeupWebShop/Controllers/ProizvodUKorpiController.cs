@@ -27,7 +27,7 @@ namespace MakeupWebShop.Controllers
             this.mapper = mapper;
             this.logger = logger; // Store ILogger instance here
         }
-        [HttpGet, Authorize(Roles = "Admin")]
+        [HttpGet]
         public async Task<IActionResult> GetAllProductInShoppingCartsAsync()
         {
             var productInShoppingCartsEntity = await proizvodUKorpiRepository.GetAllAsync();
@@ -54,17 +54,17 @@ namespace MakeupWebShop.Controllers
         [Route("korpa/{korpaId:int}")]
         public async Task<IActionResult> GetProductInShoppingCartByKorpaIdAsync(int korpaId)
         {
-            var productInShoppingCartEntity = await proizvodUKorpiRepository.GetByKorpaIdAsync(korpaId);
+            var productInShoppingCartEntities = await proizvodUKorpiRepository.GetByKorpaIdAsync(korpaId);
 
-            if (productInShoppingCartEntity == null)
+            if (productInShoppingCartEntities == null || !productInShoppingCartEntities.Any())
             {
-                return NotFound("There is no product In Shopping Cart with this korpaId.");
+                return NotFound("There are no products in the shopping cart with this korpaId.");
             }
 
-            var productInShoppingCartDto = mapper.Map<Models.DTO.ProizvodUKorpi>(productInShoppingCartEntity);
-            return Ok(productInShoppingCartDto);
+            var productInShoppingCartDtos = productInShoppingCartEntities.Select(entity => mapper.Map<Models.DTO.ProizvodUKorpi>(entity));
+            return Ok(productInShoppingCartDtos);
         }
-        [HttpPost, Authorize(Roles = "User")]
+        [HttpPost] //, Authorize(Roles = "User")
         public async Task<IActionResult> AddProductInShoppingCartAsync(Models.DTO.AddProizvodUKorpiRequest addProizvodUKorpiRequest)
         {
             //Request(DTO) to entity model

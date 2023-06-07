@@ -61,6 +61,12 @@ import { AddTipComponent } from './admin/add-tip/add-tip.component';
 import { AddNamenaComponent } from './admin/add-namena/add-namena.component';
 import { AddKolekcijaComponent } from './admin/add-kolekcija/add-kolekcija.component';
 import { AddProizvodComponent } from './admin/add-proizvod/add-proizvod.component';
+import { PanelComponent } from './admin/panel/panel.component';
+import { BrendComponent } from './admin/tables/brend/brend.component';
+import { KolekcijaComponent } from './admin/tables/kolekcija/kolekcija.component';
+import { NamenaComponent } from './admin/tables/namena/namena.component';
+import { TipComponent } from './admin/tables/tip/tip.component';
+import { ProizvodComponent } from './admin/tables/proizvod/proizvod.component';
 
 
 
@@ -81,6 +87,12 @@ import { AddProizvodComponent } from './admin/add-proizvod/add-proizvod.componen
     AddNamenaComponent,
     AddKolekcijaComponent,
     AddProizvodComponent,
+    PanelComponent,
+    BrendComponent,
+    KolekcijaComponent,
+    NamenaComponent,
+    TipComponent,
+    ProizvodComponent,
   ],
   imports: [
     BrowserModule,

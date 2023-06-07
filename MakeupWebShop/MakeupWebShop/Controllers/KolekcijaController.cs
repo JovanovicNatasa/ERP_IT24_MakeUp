@@ -42,7 +42,7 @@ namespace MakeupWebShop.Controllers
             var collectionDto = mapper.Map<Models.DTO.Kolekcija>(collectionEntity);
             return Ok(collectionDto);
         }
-        [HttpPost, Authorize(Roles = "Admin")]
+        [HttpPost] //, Authorize(Roles = "Admin")
         public async Task<IActionResult> AddCollectionAsync(Models.DTO.AddKolekcijaRequest addKolekcijaRequest)
         {
             //Request(DTO) to entity model
