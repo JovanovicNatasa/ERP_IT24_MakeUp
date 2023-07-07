@@ -20,5 +20,10 @@ namespace MakeupWebShop.Models.DTO
 
         public int KorpaId { get; set; }
         public virtual TblKorpa Korpa { get; set; } = null!;
+
+        public string? ClientSecret { get; set; }
+        public string? PaymentIntentId { get; set; }
+
+        public string? Status { get; set; }
     }
 }

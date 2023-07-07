@@ -1,10 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AddKolekcijaRequest } from 'src/app/models/api-models/collection.model';
+import { AdminService } from '../admin.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
-interface AddKolekcijaRequest {
-  nazivKolekcije: string;
-}
 
 @Component({
   selector: 'app-add-kolekcija',
@@ -14,7 +15,7 @@ interface AddKolekcijaRequest {
 export class AddKolekcijaComponent implements OnInit {
   addCollectionForm!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient) { }
+  constructor(private formBuilder: FormBuilder, private http: HttpClient,private adminService:AdminService,private snackBar:MatSnackBar,private router: Router) { }
 
   ngOnInit() {
     this.addCollectionForm = this.formBuilder.group({
@@ -31,17 +32,26 @@ export class AddKolekcijaComponent implements OnInit {
       nazivKolekcije: this.addCollectionForm.value.nazivKolekcije
     };
 
-    this.http.post('https://localhost:44307/Kolekcija', addKolekcijaRequest)
-      .subscribe(
-        (response) => {
-          console.log('addKolekcijaRequest successful', response);
-          // Perform any additional actions or show success message
-        },
-        (error) => {
-          console.error('addKolekcijaRequest failed', error);
-          // Handle the error condition, show error message, etc.
-        }
-      );
+    this.adminService.addKolekcija(addKolekcijaRequest)
+    .subscribe(
+      (response) => {
+        console.log('addKolekcijaRequest successful', response);
+        // Perform any additional actions or show success message
+        this.snackBar.open('Kolekcija added successfully!', undefined, {
+          duration:2000
+        });
+        setTimeout(()=>{
+
+          this.router.navigateByUrl('Pregled-kolekcije');
+
+        },2000)
+      },
+      (error) => {
+        console.error('addKolekcijaRequest failed', error);
+        // Handle the error condition, show error message, etc.
+      }
+    );
+
   }
 
 }

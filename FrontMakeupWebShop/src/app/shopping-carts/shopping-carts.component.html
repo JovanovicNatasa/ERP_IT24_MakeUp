@@ -43,14 +43,14 @@
           <h2 class="subtotal">Cena bez poštarine: {{ setIznos() }}.00 RSD</h2>
           <h3 class="shipping">Isporuka:
             <ng-container *ngIf="shipping(setIznos()) === 0; else paidShipping">Besplatno :)</ng-container>
-            <ng-template #paidShipping>500.00 RSD</ng-template>
+            <ng-template #paidShipping>300.00 RSD</ng-template>
           </h3>
 
         </div>
 
         <div class="right">
           <h1 class="total">Ukupno: <span>{{ sum(setIznos(),shipping(setIznos())) }}</span>.00 RSD</h1>
-          <a class="btn">Plaćanje</a>
+          <a class="btn" [routerLink]="'/Isporuka'" (click)="addBill()">Završi kupovinu</a>
         </div>
 
       </div>

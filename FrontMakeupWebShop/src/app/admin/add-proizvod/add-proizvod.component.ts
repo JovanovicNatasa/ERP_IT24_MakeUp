@@ -1,19 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AddProizvodService } from '../add-proizvod/add-proizvod.service';
+import { AdminService } from '../admin.service';
+import { AddProizvodRequest } from 'src/app/models/api-models/product.model';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
-interface AddProizvodRequest {
- model: string,
- sastav: string,
- nacinUpotrebe: string,
-  kolekcijaId :number;
-  cenaPoKom:number;
-  brendId:number;
-  namenaId:number;
-  tipId:number;
-  kolicinaNaStanju:number;
-}
 interface Brend {
   brendId: number;
   nazivBrenda: string;
@@ -34,7 +26,6 @@ interface Tip {
   selector: 'app-add-proizvod',
   templateUrl: './add-proizvod.component.html',
   styleUrls: ['./add-proizvod.component.css'],
-   providers: [AddProizvodService]
 })
 export class AddProizvodComponent implements OnInit {
   addProizvodForm!: FormGroup;
@@ -43,7 +34,7 @@ export class AddProizvodComponent implements OnInit {
   tipovi: Tip[] = [];
   namene: Namena[] = [];
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient) { }
+  constructor(private formBuilder: FormBuilder, private http: HttpClient,private adminService:AdminService, private snackBar:MatSnackBar, private router : Router) { }
 
   ngOnInit() {
     this.addProizvodForm = this.formBuilder.group({
@@ -136,18 +127,26 @@ export class AddProizvodComponent implements OnInit {
       sastav: this.addProizvodForm.value.sastav,
       nacinUpotrebe: this.addProizvodForm.value.nacinUpotrebe,
     };
-    this.http
-      .post('https://localhost:44307/Proizvod', addProizvodRequest)
-      .subscribe(
-        response => {
-          console.log('addProizvodRequest successful', response);
-          // Perform any additional actions or show success message
-        },
-        error => {
-          console.error('addProizvodRequest failed', error);
-          // Handle the error condition, show error message, etc.
-        }
-      );
+
+    this.adminService.addProizvod(addProizvodRequest)
+    .subscribe(
+      (response) => {
+        console.log('addProizvodRequest successful', response);
+        // Perform any additional actions or show success message
+        this.snackBar.open('Proizvod added successfully!', undefined, {
+          duration:2000
+        });
+        setTimeout(()=>{
+
+          this.router.navigateByUrl('Pregled-proizvoda');
+
+        },2000)
+      },
+      (error) => {
+        console.error('addBrendRequest failed', error);
+        // Handle the error condition, show error message, etc.
+      }
+    );
 
   }
 }

@@ -13,7 +13,7 @@ import { AdminService } from '../../admin.service';
 export class BrendComponent implements OnInit{
   brend:Brand[]=[];
 
-  displayedColumns: string[] = ['nazivBrenda'];
+  displayedColumns: string[] = ['nazivBrenda','edit'];
   dataSource: MatTableDataSource<Brand>= new MatTableDataSource<Brand>();
 
   constructor(private adminService: AdminService){}

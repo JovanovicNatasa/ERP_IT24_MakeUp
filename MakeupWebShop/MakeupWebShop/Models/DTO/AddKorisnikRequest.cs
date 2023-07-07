@@ -19,9 +19,6 @@ namespace MakeupWebShop.Models.DTO
 
         public string? Lozinka { get; set; }
 
-        //public int? BrojKupovina { get; set; }
         public TblAdresa Adresa { get; set; }
-       // public virtual TblAdresa? Adresa { get; set; } = null;
-        //public int? UlogaId { get; set; }
     }
 }

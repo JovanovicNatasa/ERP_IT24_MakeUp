@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ProductDetailsService } from './product-details.service';
 import { LoginService } from 'src/app/users/login/login.service';
 import { Product } from 'src/app/models/api-models/product.model';
+import{ToastrService} from 'ngx-toastr'
 
 @Component({
   selector: 'app-product-details',
@@ -21,7 +22,8 @@ export class ProductDetailsComponent implements OnInit {
     private readonly route: ActivatedRoute,
     private readonly router: Router,
     private readonly productDetailsService:ProductDetailsService,
-    private readonly loginService: LoginService // Inject the LoginService
+    private readonly loginService: LoginService, // Inject the LoginService
+    private readonly toastr:ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -69,6 +71,7 @@ export class ProductDetailsComponent implements OnInit {
       brojKomada: this.quantity,
       proizvodId: this.product.proizvodId,
       korpaId: this.loginService.getKorpaId()
+
     };
 
     this.productDetailsService.addProductInShoppingCart(addProizvodUKorpiRequest)
@@ -76,6 +79,7 @@ export class ProductDetailsComponent implements OnInit {
         (successResponse) => {
           // Handle success response if needed
           console.log("Product added to shopping cart:", successResponse);
+          this.toastr.success('Proizvod dodat u korpu')
         },
         (errorResponse) => {
           // Handle error response if needed

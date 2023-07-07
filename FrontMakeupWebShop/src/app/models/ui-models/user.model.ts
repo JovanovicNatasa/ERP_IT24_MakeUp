@@ -7,6 +7,7 @@ export class User {
   username: string;
   lozinka: string;
   adresa: Address;
+  uloga:Uloga;
 
   constructor() {
     this.korisnikId=0;
@@ -17,6 +18,7 @@ export class User {
     this.username = '';
     this.lozinka = '';
     this.adresa = new Address();
+    this.uloga=new Uloga();
   }
 }
 
@@ -35,3 +37,17 @@ export class Address {
     this.postanskiBroj = 0;
   }
 }
+
+  export class Uloga {
+    ulogaId:number;
+    nazivUloge:string;
+    kratakOpis :string;
+    sifra : string;
+
+    constructor() {
+      this.ulogaId=0;
+      this.nazivUloge='';
+      this.kratakOpis='';
+      this.sifra ='';
+    }
+  }

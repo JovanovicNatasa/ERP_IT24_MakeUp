@@ -5,6 +5,7 @@ import { LoginService } from '../users/login/login.service';
 import { ShoppingCart } from '../models/api-models/shopping-basket.model';
 import { ProductDetailsService } from '../products/product-details/product-details.service';
 import { switchMap } from 'rxjs';
+import { AddBill } from '../models/api-models/postBill.model';
 
 @Component({
   selector: 'app-shopping-carts',
@@ -17,9 +18,7 @@ export class ShoppingCartsComponent implements OnInit {
   productsInCart: ProductInCart[] = []; // Array to store products in the cart
   korpa: ShoppingCart | undefined;
   korpaId = this.loginService.getKorpaId();
-
-
-
+  id:number=28;
 
   constructor(
     private shoppingCartsService: ShoppingCartsService,
@@ -55,6 +54,31 @@ export class ShoppingCartsComponent implements OnInit {
       );
   }
 
+  addBill() {
+    this.id+=1;
+    const addBillRequest: AddBill = {
+      racunId:this.id,
+      korpaId:this.korpaId
+    };
+
+    try {
+      // Call the API to create the "racun"
+      this.shoppingCartsService.postBill(addBillRequest).subscribe(
+        (response: any) => {
+          // Log the response to the console
+          console.log("Racun created:", response);
+        },
+        (error: any) => {
+          // Handle error while creating "racun"
+          console.error("Error creating racun:", error);
+        }
+      );
+    } catch (error) {
+      // Handle error while creating "racun"
+      console.error("Error creating racun:", error);
+    }
+  }
+
 
   setIznos(): number {
     return this.iznos || 0; //  default value in case `iznos` is undefined
@@ -62,7 +86,7 @@ export class ShoppingCartsComponent implements OnInit {
 
   shipping(iznos:number):number{
     if (iznos<=3000){
-      return 500;
+      return 300;
     }
     else return 0;
   }

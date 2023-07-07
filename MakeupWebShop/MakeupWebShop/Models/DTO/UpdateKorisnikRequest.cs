@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using MakeupWebShop.Db;
+using System.ComponentModel.DataAnnotations;
 
 namespace MakeupWebShop.Models.DTO
 {
@@ -17,10 +18,6 @@ namespace MakeupWebShop.Models.DTO
 
         public string? Lozinka { get; set; }
 
-        public int? BrojKupovina { get; set; }
-
-        public int? AdresaId { get; set; }
-
-        //public int? UlogaId { get; set; }
+        public TblAdresa Adresa { get; set; }
     }
 }

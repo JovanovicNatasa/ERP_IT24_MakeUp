@@ -16,6 +16,15 @@ import { BrendComponent } from './admin/tables/brend/brend.component';
 import { TipComponent } from './admin/tables/tip/tip.component';
 import { NamenaComponent } from './admin/tables/namena/namena.component';
 import { KolekcijaComponent } from './admin/tables/kolekcija/kolekcija.component';
+import { ShippingInformationComponent } from './shopping-carts/shipping-information/shipping-information.component';
+import { PaymentComponent } from './shopping-carts/payment/payment.component';
+import { UpdateProizvodComponent } from './admin/update/update-proizvod/update-proizvod.component';
+import { UpdateBrendComponent } from './admin/update/update-brend/update-brend.component';
+import { UpdateTipComponent } from './admin/update/update-tip/update-tip.component';
+import { UpdateNamenaComponent } from './admin/update/update-namena/update-namena.component';
+import { UpdateKolekcijaComponent } from './admin/update/update-kolekcija/update-kolekcija.component';
+import { RacunComponent } from './admin/tables/racun/racun.component';
+import { KorisnikComponent } from './admin/tables/korisnik/korisnik.component';
 
 const routes: Routes = [
   {
@@ -73,6 +82,14 @@ const routes: Routes = [
     component:BrendComponent
   },
   {
+    path:'Pregled-racuna',
+    component:RacunComponent
+  },
+  {
+    path:'Pregled-korisnika',
+    component: KorisnikComponent
+  },
+  {
     path:'Pregled-tipa',
     component:TipComponent
   },
@@ -84,6 +101,34 @@ const routes: Routes = [
   {
     path:'Pregled-kolekcije',
     component:KolekcijaComponent
+  },
+  {
+    path:'Pregled-proizvoda/:id',
+    component:UpdateProizvodComponent
+  },
+  {
+    path:'Pregled-brenda/:id',
+    component:UpdateBrendComponent
+  },
+  {
+    path:'Pregled-tipa/:id',
+    component:UpdateTipComponent
+  },
+  {
+    path:'Pregled-namene/:id',
+    component:UpdateNamenaComponent
+  },
+  {
+    path:'Pregled-kolekcije/:id',
+    component:UpdateKolekcijaComponent
+  },
+  {
+    path:'Isporuka',
+    component:ShippingInformationComponent
+  },
+  {
+    path:'Placanje',
+    component:PaymentComponent
   }
 
 

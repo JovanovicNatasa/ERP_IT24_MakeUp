@@ -20,7 +20,9 @@
 .brend,
 .namena,
 .kolekcija,
-.tip{
+.tip,
+.korisnik,
+.racun{
   width: 150px;
   height: 100px;
   margin-left: 25px;

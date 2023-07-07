@@ -1,0 +1,147 @@
+<div class="page-header">
+  <div class="container">
+    <h1>Upadate proizvod</h1>
+  </div>
+</div>
+<hr>
+<div class="container">
+  <div class="row top-row">
+    <div class="col-xs-12 row end-xs">
+      <a routerLink="/Pregled-proizvoda" color="primary" mat-raised-button>
+        <mat-icon>chevron-left</mat-icon>
+        Nazad
+      </a>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-6">
+
+      <form #parfemUpdateForm="ngForm">
+        <div class="row">
+          <div class="col-xs-6">
+            <mat-form-field appearance="fill" [style.width.px]=250>
+              <mat-label> Brend</mat-label>
+              <mat-select [(ngModel)]="product.brendId" name="brend">
+
+                <mat-option *ngFor="let brend of brendList" [value]="brend.brendId">
+                  {{ brend.nazivBrenda }}
+                </mat-option>
+
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col-xs-6">
+            <mat-form-field appearance="fill" [style.width.px]=250>
+              <mat-label> Kolekcija</mat-label>
+              <mat-select [(ngModel)]="product.kolekcijaId" name="kolekcija">
+
+                <mat-option *ngFor="let kolekcija of kolekcijaList" [value]="kolekcija.kolekcijaId">
+                  {{kolekcija.nazivKolekcije}}
+                </mat-option>
+
+
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+        </div>
+
+
+        <div class="row">
+          <div class="col-xs-6">
+            <mat-form-field appearance="fill" [style.width.px]=250>
+              <mat-label> Model</mat-label>
+              <input type="text" matInput [(ngModel)]="product.model" name="model">
+            </mat-form-field>
+          </div>
+
+          <div class="col-xs-6">
+            <mat-form-field appearance="fill" [style.width.px]=250>
+              <mat-label> Tip</mat-label>
+              <mat-select [(ngModel)]="product.tipId" name="tip">
+
+                <mat-option *ngFor="let tip of tipList" [value]="tip.tipId">
+                  {{tip.nazivTipa}}
+                </mat-option>
+
+
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+        </div>
+
+        <div class="row">
+          <div class="col-xs-6">
+            <mat-form-field appearance="fill" [style.width.px]=250>
+              <mat-label> Cena</mat-label>
+              <input type="text" matInput [(ngModel)]="product.cenaPoKom" name="cenaPoKom">
+            </mat-form-field>
+          </div>
+
+          <div class="col-xs-6">
+            <mat-form-field appearance="fill" [style.width.px]=250>
+              <mat-label> Kolicina na stanju</mat-label>
+              <input type="text" matInput [(ngModel)]="product.kolicinaNaStanju" name="kolicinaNaStanju">
+            </mat-form-field>
+          </div>
+
+        </div>
+
+		<div class="row">
+          <div class="col-xs-6">
+            <mat-form-field appearance="fill" [style.width.px]=250>
+              <mat-label> Sastav</mat-label>
+              <input type="text" matInput [(ngModel)]="product.sastav" name="sastav">
+            </mat-form-field>
+          </div>
+
+          <div class="col-xs-6">
+            <mat-form-field appearance="fill" [style.width.px]=250>
+              <mat-label> Nacin upotrebe</mat-label>
+              <input type="text" matInput [(ngModel)]="product.nacinUpotrebe" name="nacinUpotrebe">
+            </mat-form-field>
+          </div>
+
+        </div>
+
+
+
+
+		 <div class="row">
+
+
+          <div class="col-xs-6">
+            <mat-form-field appearance="fill" [style.width.px]=250>
+              <mat-label> Namena</mat-label>
+              <mat-select [(ngModel)]="product.namenaId" name="namena">
+
+                <mat-option *ngFor="let namena of namenaList" [value]="namena.namenaId">
+                  {{namena.nazivNamene}}
+                </mat-option>
+
+
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+        </div>
+
+
+
+        <div class="row-2">
+          <div class="col-cs">
+            <div class="row between-xs">
+              <button mat-raised-button color="primary" (click)="onUpdate()">Sacuvaj</button>
+              <button mat-raised-button color="warn" (click)="onDelete()">Delete</button>
+
+            </div>
+
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

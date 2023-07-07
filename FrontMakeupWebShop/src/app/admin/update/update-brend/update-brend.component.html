@@ -1,0 +1,43 @@
+<div class="page-header">
+  <div class="container">
+    <h1>Upadte brenda</h1>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row-top-row">
+    <div class="col-xs-12 row end-xs">
+      <a routerLink="/api/Pregled-brenda" color="primary" mat-raised-button>
+        <mat-icon>chevron-left</mat-icon>
+        Nazad
+      </a>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-6">
+
+      <form #brendUpdateForm="ngForm">
+        <div class="row-1">
+          <div class="col-xs-6">
+            <mat-form-field appearance="fill" [style.width.px]=575>  <!--OVDE DUYINU NAMESTAT-->
+              <mat-label> Naziv brenda</mat-label>
+              <input type="text" matInput [(ngModel)]="brend.nazivBrenda" name="nazivBrenda">
+            </mat-form-field>
+          </div>
+
+        </div>
+        <div class="row-2">
+          <div class="col-cs">
+            <div class="row between-xs">
+              <button mat-raised-button color="primary" (click)="onUpdate()">Sacuvaj</button>
+              <button mat-raised-button color="warn" (click)="onDelete()">Delete</button>
+
+            </div>
+
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

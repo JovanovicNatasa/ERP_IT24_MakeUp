@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from './login.service';
-import { Login } from 'src/app/models/ui-models/login.model';
-import { threadId } from 'worker_threads';
-import { waitForAsync } from '@angular/core/testing';
 import { ShoppingCart } from 'src/app/models/ui-models/shopping-basket.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +15,7 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
 
 
-  constructor(private loginService: LoginService,private formBuilder: FormBuilder) {
+  constructor(private loginService: LoginService,private formBuilder: FormBuilder, private router:Router) {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       lozinka: ['', Validators.required]
@@ -28,6 +25,15 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  isAdmin(): boolean {
+    if (this.loginService.getUloga() == 1) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
 
   login(): void {
     if (this.loginForm.invalid) {
@@ -56,8 +62,15 @@ export class LoginComponent implements OnInit {
 
         this.loginService.setUsername(username);
 
-        // Call createKorpa() after successful login
-        this.createKorpa();
+
+
+        if (this.isAdmin()) {
+          this.router.navigateByUrl('/Admin-panel'); // Redirect to /Admin-panel
+        } else {
+          // Call createKorpa() after successful login
+          this.createKorpa();
+          this.router.navigateByUrl('/'); // Redirect to the home route
+        }
       },
       (error: any) => {
         // Handle login error
@@ -76,10 +89,8 @@ export class LoginComponent implements OnInit {
   createKorpa(): void {
     // Get the korisnikId from the LoginService
     const korisnikId = this.loginService.getKorisnikId();
-
     // Get the korpaId from the LoginService
     const korpaId = this.loginService.getKorpaId();
-
     this.korpaRequest.korisnikId = korisnikId;
     this.korpaRequest.korpaId = korpaId;
 

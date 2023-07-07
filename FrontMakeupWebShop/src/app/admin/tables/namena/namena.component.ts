@@ -13,7 +13,7 @@ import { MatSort } from '@angular/material/sort';
 export class NamenaComponent implements OnInit{
   namena:Purpose[]=[];
 
-  displayedColumns: string[] = ['nazivNamene'];
+  displayedColumns: string[] = ['nazivNamene','edit'];
   dataSource: MatTableDataSource<Purpose>= new MatTableDataSource<Purpose>();
 
   constructor(private adminService: AdminService){}

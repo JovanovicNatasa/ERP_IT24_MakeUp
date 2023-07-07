@@ -13,5 +13,7 @@ namespace MakeupWebShop.Repositories
         Task<TblAdresa> UpdateAsync(int id, TblAdresa tblAdresa);
         Task<TblAdresa> DeleteAsync(int id);
         Task<TblAdresa> GetAdresaByDetailsAsync(AddKorisnikRequest korisnikDto);
+
+        Task<TblAdresa> GetAdresaByDetailsForUpdateAsync(UpdateKorisnikRequest korisnikDto);
     }
 }

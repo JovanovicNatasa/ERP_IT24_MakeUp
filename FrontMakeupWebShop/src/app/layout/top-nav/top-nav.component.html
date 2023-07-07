@@ -1,8 +1,15 @@
 <mat-toolbar color="primary">
   <div class="logo">
-    <a routerLink="/" (click)="clearFilters()">
-      <img src="/assets/logo1.png" alt="Pocetna strana" width="200" height="60">
-    </a>
+    <ng-container *ngIf="isAdmin(); else redirectToHome">
+      <a routerLink="/Admin-panel" (click)="clearFilters()">
+        <img src="/assets/logo1.png" alt="Admin Panel" width="200" height="60">
+      </a>
+    </ng-container>
+    <ng-template #redirectToHome>
+      <a routerLink="/" (click)="clearFilters()">
+        <img src="/assets/logo1.png" alt="Pocetna strana" width="200" height="60">
+      </a>
+    </ng-template>
   </div>
   <div class="search">
       <div class="oval-textbox">

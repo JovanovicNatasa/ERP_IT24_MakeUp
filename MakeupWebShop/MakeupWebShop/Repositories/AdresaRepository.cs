@@ -94,5 +94,34 @@ namespace MakeupWebShop.Repositories
 
             return adresa;
         }
+
+        // Method to get address by details for UpdateKorisnikRequest
+        public async Task<TblAdresa> GetAdresaByDetailsForUpdateAsync(UpdateKorisnikRequest updateKorisnikRequest)
+        {
+            var adresa = await makeUpDbContext.TblAdresas
+                .FirstOrDefaultAsync(a => a.Grad == updateKorisnikRequest.Adresa.Grad &&
+                                           a.Ulica == updateKorisnikRequest.Adresa.Ulica &&
+                                           a.Broj == updateKorisnikRequest.Adresa.Broj &&
+                                           a.PostanskiBroj == updateKorisnikRequest.Adresa.PostanskiBroj);
+
+            if (adresa == null)
+            {
+                adresa = new TblAdresa
+                {
+                    Grad = updateKorisnikRequest.Adresa.Grad,
+                    Ulica = updateKorisnikRequest.Adresa.Ulica,
+                    Broj = updateKorisnikRequest.Adresa.Broj,
+                    PostanskiBroj = updateKorisnikRequest.Adresa.PostanskiBroj
+                };
+
+                makeUpDbContext.TblAdresas.Add(adresa);
+                await makeUpDbContext.SaveChangesAsync();
+            }
+
+            return adresa;
+        }
     }
+
+
+
 }

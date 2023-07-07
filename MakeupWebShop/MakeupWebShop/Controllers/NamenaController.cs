@@ -38,9 +38,9 @@ namespace MakeupWebShop.Controllers
         [HttpGet]
         [Route("{id:int}")]
         [ActionName("GetNamenaAsync")]
-        public async Task<IActionResult> GetPurposeAsync(int NamenaId)
+        public async Task<IActionResult> GetPurposeAsync(int id)
         {
-            var purpose = await namenaRepository.GetByIdAsync(NamenaId);
+            var purpose = await namenaRepository.GetByIdAsync(id);
 
             if (purpose == null)
             {
@@ -72,12 +72,12 @@ namespace MakeupWebShop.Controllers
 
         [HttpDelete, Authorize(Roles = "Admin")]
         [Route("{id:int}")]
-        public async Task<IActionResult> DeletePurposeAsync(int NamenaId)
+        public async Task<IActionResult> DeletePurposeAsync(int id)
         {
 
             //get doc from database
 
-            var purpose = await namenaRepository.DeleteAsync(NamenaId);
+            var purpose = await namenaRepository.DeleteAsync(id);
 
             if (purpose == null)
             {
@@ -93,7 +93,7 @@ namespace MakeupWebShop.Controllers
 
         [HttpPut, Authorize(Roles = "Admin")]
         [Route("{id:int}")]
-        public async Task<IActionResult> UpdatePurposeAsync([FromRoute] int NamenaId, [FromBody] Models.DTO.UpdateNamenaRequest updateNamenaRequest)
+        public async Task<IActionResult> UpdatePurposeAsync([FromRoute] int id, [FromBody] Models.DTO.UpdateNamenaRequest updateNamenaRequest)
         {
             var purpose = new Db.TblNamena()
             {
@@ -101,7 +101,7 @@ namespace MakeupWebShop.Controllers
                 NazivNamene = updateNamenaRequest.NazivNamene
             };
 
-            purpose = await namenaRepository.UpdateAsync(NamenaId, purpose);
+            purpose = await namenaRepository.UpdateAsync(id, purpose);
 
             if (purpose == null)
             {

@@ -14,7 +14,7 @@ import { MatSort } from '@angular/material/sort';
 export class KolekcijaComponent implements OnInit{
   kolekcija:Collection[]=[];
 
-  displayedColumns: string[] = ['nazivKolekcije'];
+  displayedColumns: string[] = ['nazivKolekcije','edit'];
   dataSource: MatTableDataSource<Collection>= new MatTableDataSource<Collection>();
 
   constructor(private adminService: AdminService){}

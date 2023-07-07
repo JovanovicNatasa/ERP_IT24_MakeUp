@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.initializeUser();
+    this.initializeShoppingCart();
   }
 
   private initializeUser() {
@@ -38,6 +39,17 @@ export class AppComponent implements OnInit {
     }
   }
 
+  private initializeShoppingCart(){
+    const korpaId = Number(this.cookieService.get('korpaId'));
+    if(korpaId){
+      this.accountService.loadCurrentKorpa(korpaId).subscribe((korpa)=>{
+        const korpaId=korpa?.korpaId || 0;
+        this.loginService.setKorpaId(korpaId);
+      });
+    }else{
+      this.cookieService.delete('korpaId');
+    }
+  }
 
 
 }

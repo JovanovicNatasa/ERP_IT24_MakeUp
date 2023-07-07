@@ -1,0 +1,52 @@
+<div class="body">
+  <div class="main">
+    <div class="signup" >
+      <form [formGroup]="shippingInfoForm">
+        <label>Podaci za isporuku</label>
+        <div class="input-group">
+          <mat-error *ngIf="shippingInfoForm.controls['ime'].touched && shippingInfoForm.controls['ime'].value === ''">
+            Ime is required.
+          </mat-error>
+          <input id="ime" formControlName="ime" type="text" name="ime" placeholder="Ime" required>
+          <mat-error *ngIf="shippingInfoForm.controls['grad'].touched && shippingInfoForm.controls['grad'].value === ''">
+            Grad is required.
+          </mat-error>
+          <input id="grad" formControlName="grad" type="text" name="grad" placeholder="Grad" required>
+        </div>
+        <div class="input-group">
+          <input id="przime" formControlName="prezime" type="text" name="prezime" placeholder="Prezime" required>
+          <mat-error *ngIf="shippingInfoForm.controls['prezime'].touched && shippingInfoForm.controls['prezime'].value === ''">
+            Prezime is required.
+          </mat-error>
+
+          <input id="postanskiBroj" formControlName="postanskiBroj" type="text" name="postanskiBroj" placeholder="Poštanski broj" required>
+          <mat-error *ngIf="shippingInfoForm.controls['postanskiBroj'].touched && shippingInfoForm.controls['postanskiBroj'].value === ''">
+            Poštanski broj is required.
+          </mat-error>
+
+        </div>
+        <div class="input-group">
+          <input id="kontakt" formControlName="kontakt" type="text" name="kontakt" placeholder="Kontakt" required>
+          <mat-error *ngIf="shippingInfoForm.controls['kontakt'].touched && shippingInfoForm.controls['kontakt'].value === ''">
+            Kontakt is required.
+          </mat-error>
+
+          <input id="ulica" formControlName="ulica" type="text" name="ulica" placeholder="Ulica" required>
+          <mat-error *ngIf="shippingInfoForm.controls['ulica'].touched && shippingInfoForm.controls['ulica'].value === ''">
+            Ulica is required.
+          </mat-error>
+        </div>
+        <div class="input-group">
+          <input id="broj" formControlName="broj" type="text" name="broj" placeholder="Broj" required>
+          <mat-error *ngIf="shippingInfoForm.controls['broj'].touched && shippingInfoForm.controls['broj'].value === ''">
+            Broj is required.
+          </mat-error>
+
+        </div>
+        <button mat-button class="updateUser-button"(click)="updateUser()">Izmeni lične podatke</button>
+        <button mat-button class="payment-button" (click)="createPaymentIntent()"  routerLink="/Placanje">Pređi Na Plaćanje</button>
+
+      </form>
+    </div>
+  </div>
+</div>

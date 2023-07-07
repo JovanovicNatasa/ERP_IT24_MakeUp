@@ -7,11 +7,12 @@ export interface User {
   kontakt: string;
   username: string;
   lozinka: string;
+  ulogaId:number;
   adresa: {
     adresaId: number;
     grad: string;
     ulica: string;
     broj: string;
-    postanskiBroj: string;
+    postanskiBroj: number;
   };
 }

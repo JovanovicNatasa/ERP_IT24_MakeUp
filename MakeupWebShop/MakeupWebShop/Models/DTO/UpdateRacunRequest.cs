@@ -15,5 +15,8 @@
         public decimal IznosSaPopustom { get; set; }
 
         public int KorpaId { get; set; }
+
+        public string? ClientSecret { get; set; }
+        public string? PaymentIntentId { get; set; }
     }
 }

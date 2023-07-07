@@ -18,18 +18,23 @@ namespace MakeupWebShop.Repositories
         {
             var korpa = await korpaRepository.GetByIdAsync(tblRacun.KorpaId);
             var iznos = korpa.UkupanIznos;
+            var popust = korpa.ProcenatPop;
             tblRacun.IznosPost = 300;
             if (iznos >= 5000)
             {
                 tblRacun.IznosPost = 0;
             }
-            tblRacun.IznosSaPost = (decimal)(iznos + tblRacun.IznosPost);
+            if (korpa.Popust == true)
+            {
+                tblRacun.IznosSaPost = (decimal)(iznos - iznos * popust / 100 + tblRacun.IznosPost);
+            }
+            else {
+                tblRacun.IznosSaPost = (decimal)(iznos + tblRacun.IznosPost);
+            }
+            
 
             await makeUpDbContext.AddAsync(tblRacun);
             await makeUpDbContext.SaveChangesAsync();
-
-            // Fetch the updated entity from the context
-           // var updatedEntity = await makeUpDbContext.TblRacuns.FindAsync(tblRacun.RacunId);
 
             return tblRacun;
         }
@@ -78,26 +83,9 @@ namespace MakeupWebShop.Repositories
             return existingTblRacun;
         }
 
-        public async Task<TblRacun> CalculateShipping(int racunId)
+        public async Task<TblRacun> GetByPaymentIntentIdAsync(string paymentIntentId)
         {
-
-            var racun = await makeUpDbContext.TblRacuns.FirstOrDefaultAsync(r => r.RacunId == racunId);
-
-            if (racun.IznosPopusta > 0)
-            {
-                racun.IznosSaPost = (decimal)(racun.IznosSaPopustom + racun.IznosPost);
-                await makeUpDbContext.SaveChangesAsync();
-
-                // Fetch the updated bill again to capture any changes made by triggers
-                //racun = await makeUpDbContext.TblRacuns.FirstOrDefaultAsync(r => r.RacunId == racunId);
-
-                return racun;
-            }
-            else
-            {
-                return null;
-            }
-
+            return await makeUpDbContext.TblRacuns.Include(x => x.Korpa).FirstOrDefaultAsync(x => x.PaymentIntentId == paymentIntentId);
         }
     }
 }

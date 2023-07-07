@@ -1,0 +1,59 @@
+<div class="page-header">
+  <div class="container">
+    <h1>Korisnik</h1>
+  </div>
+</div>
+<hr>
+<button mat-raised-button class="back" onclick="window.location.href='Admin-panel'" color="primary">Meni</button>
+  <hr>
+<div class="container mat-elevation-z8">
+  <table mat-table matSort [dataSource]="dataSource" class="">
+  <!-- Ime Column -->
+  <ng-container matColumnDef="ime">
+    <th mat-header-cell *matHeaderCellDef> Ime </th>
+    <td mat-cell *matCellDef="let element"> {{ element.ime }} </td>
+  </ng-container>
+
+  <!-- Prezime Column -->
+  <ng-container matColumnDef="prezime">
+    <th mat-header-cell *matHeaderCellDef> Prezime </th>
+    <td mat-cell *matCellDef="let element"> {{ element.prezime }} </td>
+  </ng-container>
+
+  <!-- Email Column -->
+  <ng-container matColumnDef="email">
+    <th mat-header-cell *matHeaderCellDef> Email </th>
+    <td mat-cell *matCellDef="let element"> {{ element.email }} </td>
+  </ng-container>
+
+  <!-- NazivUloge Column -->
+  <ng-container matColumnDef="nazivUloge">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Naziv Uloge </th>
+    <td mat-cell *matCellDef="let element"> {{ element.uloga.nazivUloge }} </td>
+  </ng-container>
+
+  <!-- BrojKupovina Column -->
+  <ng-container matColumnDef="brojKupovina">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Broj Kupovina </th>
+    <td mat-cell *matCellDef="let element"> {{ element.brojKupovina }} </td>
+  </ng-container>
+
+  <!-- Grad Column -->
+  <ng-container matColumnDef="grad">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Grad </th>
+    <td mat-cell *matCellDef="let element"> {{ element.adresa.grad }} </td>
+  </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [length]="100"
+              [pageSize]="10"
+              [pageSizeOptions]="[5, 10, 25, 100]"
+              aria-label="Select page">
+</mat-paginator>
+
+
+
+</div>

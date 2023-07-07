@@ -40,6 +40,22 @@ namespace MakeupWebShop.Controllers
             var billDto = mapper.Map<Models.DTO.Racun>(billEntity);
             return Ok(billDto);
         }
+
+        [HttpGet]
+        [Route("payment-intent/{paymentIntentId}")]
+        public async Task<IActionResult> GetBillByPaymentIntentIdAsync(string paymentIntentId)
+        {
+            var billEntity = await racunRepository.GetByPaymentIntentIdAsync(paymentIntentId);
+
+            if (billEntity == null)
+            {
+                return NotFound("There is no bill with this PaymentIntentId.");
+            }
+
+            var billDto = mapper.Map<Models.DTO.Racun>(billEntity);
+            return Ok(billDto);
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddBillAsync(Models.DTO.AddRacunRequest addRacunRequest)
         {
@@ -57,12 +73,8 @@ namespace MakeupWebShop.Controllers
             // Pass details to Repository
             var addedBillEntity = await racunRepository.AddAsync(billEntity);
 
-            // Refresh the entity from the database to capture any changes made by triggers
-           // var refreshedBillEntity = await racunRepository.GetByIdAsync(addedBillEntity.RacunId);
 
-            var billEntityWithDiscount = await racunRepository.CalculateShipping(addedBillEntity.RacunId);
-
-            var billDto = mapper.Map<Models.DTO.Racun>(billEntityWithDiscount);
+            var billDto = mapper.Map<Models.DTO.Racun>(addedBillEntity);
 
             return Ok(billDto);
 

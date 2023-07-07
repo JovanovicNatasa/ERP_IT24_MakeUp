@@ -45,6 +45,7 @@ builder.Services.AddScoped<IKorisnikRepository, KorisnikRepository>();
 builder.Services.AddScoped<IKorpaRepository, KorpaRepository>();
 builder.Services.AddScoped<IProizvodUKorpiRepository, ProizvodUKorpiRepository>();
 builder.Services.AddScoped<IRacunRepository, RacunRepository>();
+builder.Services.AddScoped<IPaymentService, PaymentService>();
 
  
 

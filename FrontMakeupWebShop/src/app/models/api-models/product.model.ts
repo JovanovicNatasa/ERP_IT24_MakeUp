@@ -19,3 +19,27 @@ export interface Product{
 	kolekcijaId: number,
   kolekcija: Collection
 }
+
+export interface AddProizvodRequest {
+  model: string,
+  sastav: string,
+  nacinUpotrebe: string,
+   kolekcijaId :number;
+   cenaPoKom:number;
+   brendId:number;
+   namenaId:number;
+   tipId:number;
+   kolicinaNaStanju:number;
+ }
+
+ export interface UpdateProizvodRequest{
+  model: string,
+  sastav: string,
+  nacinUpotrebe: string,
+   kolekcijaId :number;
+   cenaPoKom:number;
+   brendId:number;
+   namenaId:number;
+   tipId:number;
+   kolicinaNaStanju:number;
+ }

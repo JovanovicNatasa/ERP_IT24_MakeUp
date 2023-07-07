@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
 
 // Material Modules
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -53,7 +54,8 @@ import { LoginComponent } from './users/login/login.component';
 import { RegisterComponent } from './users/register/register.component';
 import { ProfileComponent } from './users/profile/profile.component';
 import { ShoppingCartsComponent } from './shopping-carts/shopping-carts.component';
-import { AuthInterceptor, LoginService } from './users/login/login.service';
+import { LoginService } from './users/login/login.service';
+import { JwtInterceptor } from './users/jwt.interceptor';
 import { JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
 import { CookieService } from 'ngx-cookie-service';
 import { AddBrendComponent } from './admin/add-brend/add-brend.component';
@@ -67,6 +69,22 @@ import { KolekcijaComponent } from './admin/tables/kolekcija/kolekcija.component
 import { NamenaComponent } from './admin/tables/namena/namena.component';
 import { TipComponent } from './admin/tables/tip/tip.component';
 import { ProizvodComponent } from './admin/tables/proizvod/proizvod.component';
+import { ShippingInformationComponent } from './shopping-carts/shipping-information/shipping-information.component';
+import { PaymentComponent } from './shopping-carts/payment/payment.component';
+import { SuccessDialogComponent } from './dialog/success-dialog/success-dialog.component';
+import { ErrorDialogComponent } from './dialog/error-dialog/error-dialog.component';
+import { NotifierComponent } from './dialog/notifier/notifier.component';
+import { UpdateBrendComponent } from './admin/update/update-brend/update-brend.component';
+import { UpdateKolekcijaComponent } from './admin/update/update-kolekcija/update-kolekcija.component';
+import { UpdateNamenaComponent } from './admin/update/update-namena/update-namena.component';
+import { UpdateProizvodComponent } from './admin/update/update-proizvod/update-proizvod.component';
+import { UpdateTipComponent } from './admin/update/update-tip/update-tip.component';
+import { KorisnikComponent } from './admin/tables/korisnik/korisnik.component';
+import { RacunComponent } from './admin/tables/racun/racun.component';
+
+
+
+
 
 
 
@@ -93,6 +111,22 @@ import { ProizvodComponent } from './admin/tables/proizvod/proizvod.component';
     NamenaComponent,
     TipComponent,
     ProizvodComponent,
+    ShippingInformationComponent,
+    PaymentComponent,
+    SuccessDialogComponent,
+    ErrorDialogComponent,
+    NotifierComponent,
+    UpdateBrendComponent,
+    UpdateKolekcijaComponent,
+    UpdateNamenaComponent,
+    UpdateProizvodComponent,
+    UpdateTipComponent,
+    KorisnikComponent,
+    RacunComponent
+  ],
+  entryComponents: [
+    SuccessDialogComponent,
+    ErrorDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -137,11 +171,12 @@ import { ProizvodComponent } from './admin/tables/proizvod/proizvod.component';
     MatPaginatorModule,
     MatSortModule,
     MatTableModule,
+    ToastrModule.forRoot()
   ],
   providers: [
     LoginService,
-    AuthInterceptor,
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    JwtInterceptor,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     JwtHelperService,
     CookieService

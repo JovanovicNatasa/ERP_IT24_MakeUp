@@ -22,7 +22,7 @@ export class ProizvodComponent implements OnInit{
   brend:Brand[]=[];
   tip: Type[]=[];
   kolekcija: Collection[]=[];
-  displayedColumns: string[] = ['nazivNamene','nazivBrenda', 'nazivKolekcije','model',  'nazivTipa', 'cena','kolicinaNaStanju'];
+  displayedColumns: string[] = ['nazivNamene','nazivBrenda', 'nazivKolekcije','model',  'nazivTipa', 'cena','kolicinaNaStanju','edit'];
   dataSource: MatTableDataSource<Product>= new MatTableDataSource<Product>();
 
 @ViewChild(MatPaginator) matPaginator!:MatPaginator;
@@ -71,7 +71,7 @@ export class ProizvodComponent implements OnInit{
         console.log(errorResponse);
       }
     )
-    this.adminService.getaTip()
+    this.adminService.getTip()
     .subscribe(
       (successResponse)=>{
         this.tip=successResponse

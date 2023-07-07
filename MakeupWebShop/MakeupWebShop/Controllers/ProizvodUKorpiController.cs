@@ -94,11 +94,9 @@ namespace MakeupWebShop.Controllers
         public async Task<IActionResult> DeleteProductInShoppingCartAsync(int id)
         {
             var existingProductInShoppingCartEntity = (TblProizvodUkorpi)await proizvodUKorpiRepository.GetByIdAsync(id);
-            //await korpaRepository.UpdateTotalPriceAsync(existingProductInShoppingCartEntity.ProizUkorpiId, existingProductInShoppingCartEntity.KorpaId, existingProductInShoppingCartEntity.ProizvodId, false);
-            //Get address from Db
+           
             var productInShoppingCartEntity = await proizvodUKorpiRepository.DeleteAsync(id);
 
-           // await korpaRepository.ReduceTotalPriceAsync(existingProductInShoppingCartEntity.KorpaId, existingProductInShoppingCartEntity.ProizvodId, existingProductInShoppingCartEntity.BrojKomada);
             await proizvodRepository.RemoveProductFromCart(productInShoppingCartEntity.ProizvodId, productInShoppingCartEntity.BrojKomada, existingProductInShoppingCartEntity.KorpaId);
             
 

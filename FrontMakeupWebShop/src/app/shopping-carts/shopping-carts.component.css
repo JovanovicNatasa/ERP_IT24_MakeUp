@@ -246,11 +246,17 @@ a:hover {
 	transition: background .2s linear;
 }
 
-.qt-plus:hover, .qt-minus:hover {
+.qt-plus:hover{
 	background: #4CAF50;
 	color: #fff;
 	cursor: pointer;
 }
+.qt-minus:hover {
+  background: #fb2f2f;
+	color: #fff;
+	cursor: pointer;
+}
+
 
 .qt-plus {
 	line-height: 50px;

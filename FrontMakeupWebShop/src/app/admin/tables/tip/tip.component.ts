@@ -13,7 +13,7 @@ import { MatSort } from '@angular/material/sort';
 export class TipComponent implements OnInit{
   tip:Type[]=[];
 
-  displayedColumns: string[] = ['nazivTipa'];
+  displayedColumns: string[] = ['nazivTipa','edit'];
   dataSource: MatTableDataSource<Type>= new MatTableDataSource<Type>();
 
   constructor(private adminService: AdminService){}
@@ -23,7 +23,7 @@ export class TipComponent implements OnInit{
 
   ngOnInit(): void {
 
-    this.adminService.getaTip()
+    this.adminService.getTip()
     .subscribe(
       (successResponse)=>{
         this.tip=successResponse;

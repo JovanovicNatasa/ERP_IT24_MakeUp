@@ -11,16 +11,15 @@ namespace MakeupWebShop.Controllers
     public class KorpaController : Controller
     {
         private readonly IKorpaRepository korpaRepository;
-       /* private readonly IProizvodUKorpiRepository proizvodUKorpiRepository;
-        private readonly IProizvodRepository proizvodRepository;*/
         private readonly IMapper mapper;
-        public KorpaController(IKorpaRepository korpaRepository, /*IProizvodUKorpiRepository proizvodUKorpiRepository,
-            IProizvodRepository proizvodRepository,*/ IMapper mapper)
+        private readonly IKorisnikRepository korisnikRepository;
+        private readonly ILogger<KorpaController> _logger;
+        public KorpaController(IKorpaRepository korpaRepository, IMapper mapper, IKorisnikRepository korisnikRepository, ILogger<KorpaController> logger)
         {
             this.korpaRepository = korpaRepository;
-           /* this.proizvodUKorpiRepository= proizvodUKorpiRepository;
-            this.proizvodRepository=proizvodRepository;*/
             this.mapper = mapper;
+            this.korisnikRepository = korisnikRepository;
+            _logger = logger;
         }
         [HttpGet, Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetAllShoppingCartsAsync()
@@ -48,14 +47,32 @@ namespace MakeupWebShop.Controllers
         [HttpPost]
         public async Task<IActionResult> AddShoppingCartAsync(Models.DTO.AddKorpaRequest addKorpaRequest)
         {
+            var popust=false;
+            var procenat=0;
+            var korisnik = await korisnikRepository.GetByIdAsync(addKorpaRequest.KorisnikId);
+            var kupovine = korisnik.BrojKupovina;
+            _logger.LogInformation("VREDNOSTTTTTTTTTTTTTTTTT: {0}", kupovine);
+
+            if (kupovine > 5)
+            {
+                popust = true;
+                if (kupovine > 9)
+                {
+                    procenat = 10;
+                }
+                else
+                {
+                    procenat = 5;
+                }
+            }
             //Request(DTO) to entity model
             var shoppingCartEntity = new Db.TblKorpa()
             {
                 KorpaId = addKorpaRequest.KorpaId,
                 UkupanIznos = 0,
                 BrProizvoda = 0,
-                Popust = false,
-                ProcenatPop = 0,
+                Popust = popust,
+                ProcenatPop = procenat,
                 KorisnikId = addKorpaRequest.KorisnikId,
 
             };
@@ -64,9 +81,7 @@ namespace MakeupWebShop.Controllers
 
             //Conwert back to DTO
             var shoppingCartDto = mapper.Map<Models.DTO.Korpa>(shoppingCartEntity);
-            /*
-            return CreatedAtAction(nameof(GetAddressByIdAsync), new { id = addressDto.AdresaId }, addressDto);
-           */
+   
             return Ok(shoppingCartDto);
         }
         [HttpDelete, Authorize(Roles = "Admin")]

@@ -154,42 +154,47 @@ namespace MakeupWebShop.Controllers
             //Return response
             return Ok(userDto);
         }
-        [HttpPut, Authorize(Roles = "Admin,User")]
+        [HttpPut, Authorize(Roles = "Admin, User")]
         [Route("{id:int}/korisnik")]
         public async Task<IActionResult> UpdateUserAsync([FromRoute] int id, [FromBody] Models.DTO.UpdateKorisnikRequest updateKorisnikRequest)
         {
             string hashLozinka = BCrypt.Net.BCrypt.HashPassword(updateKorisnikRequest.Lozinka);
-            //Convert DTO to entity
-            var userEntity = new Db.TblKorisnik()
-            {
-                Ime = updateKorisnikRequest.Ime,
-                Prezime = updateKorisnikRequest.Prezime,
-                Jmbg = "jmbg000000000",
-                Email = updateKorisnikRequest.Email,
-                Kontakt = updateKorisnikRequest.Kontakt,
-                Username = updateKorisnikRequest.Username,
-                Lozinka = hashLozinka,
-                BrojKupovina = updateKorisnikRequest.BrojKupovina,
-                AdresaId = updateKorisnikRequest.AdresaId,
-                //UlogaId = updateKorisnikRequest.UlogaId,
-            };
 
+            // Check if the address already exists
+            TblAdresa adresa = await adresaRepository.GetAdresaByDetailsForUpdateAsync(updateKorisnikRequest);
 
-            //Update Address using repository
+            // Retrieve the existing user
+            var existingUser = await korisnikRepository.GetByIdAsync(id);
 
-            userEntity = await korisnikRepository.UpdateAsync(id, userEntity);
-
-            //if null NotFound
-            if (userEntity == null)
+            // If the user doesn't exist, return NotFound
+            if (existingUser == null)
             {
                 return NotFound("There is no user with this id.");
             }
 
-            //Convert back to DTO
-            var userDto = mapper.Map<Models.DTO.Korisnik>(userEntity);
-            //Return ok
+            // Update the user properties
+            existingUser.Ime = updateKorisnikRequest.Ime;
+            existingUser.Prezime = updateKorisnikRequest.Prezime;
+            existingUser.Jmbg = "jmbg000000000";
+            existingUser.Email = updateKorisnikRequest.Email;
+            existingUser.Kontakt = updateKorisnikRequest.Kontakt;
+            existingUser.Username = updateKorisnikRequest.Username;
+            existingUser.Lozinka = hashLozinka;
+            existingUser.UlogaId = 1;
+
+            // Set the AdresaId property to the ID of the retrieved or newly created address
+            existingUser.AdresaId = adresa.AdresaId;
+
+            // Update the user using the repository
+            existingUser = await korisnikRepository.UpdateAsync(id, existingUser);
+
+            // Convert back to DTO
+            var userDto = mapper.Map<Models.DTO.Korisnik>(existingUser);
+
+            // Return Ok
             return Ok(userDto);
         }
+
 
         [HttpPut, Authorize(Roles = "Admin")]
         [Route("{korisnikId:int}/uloga")]

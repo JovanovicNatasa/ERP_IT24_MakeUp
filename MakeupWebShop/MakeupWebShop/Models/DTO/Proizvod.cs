@@ -22,6 +22,7 @@ namespace MakeupWebShop.Models.DTO
         public int NamenaId { get; set; }
         public int TipId { get; set; }
         public int KolekcijaId { get; set; }
+
         public virtual TblBrend Brend { get; set; } = null!;
 
 

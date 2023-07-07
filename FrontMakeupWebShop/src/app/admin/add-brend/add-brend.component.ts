@@ -1,10 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AdminService } from '../admin.service';
+import { AddBrendRequest } from 'src/app/models/api-models/brand.model';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
-interface AddBrendRequest {
-  nazivBrenda: string;
-}
+
 
 @Component({
   selector: 'app-add-brend',
@@ -14,7 +16,7 @@ interface AddBrendRequest {
 export class AddBrendComponent implements OnInit {
   addBrandForm!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient) { }
+  constructor(private formBuilder: FormBuilder, private http: HttpClient, private adminService:AdminService, private snackBar:MatSnackBar,private router:Router) { }
 
   ngOnInit() {
     this.addBrandForm = this.formBuilder.group({
@@ -31,17 +33,27 @@ export class AddBrendComponent implements OnInit {
       nazivBrenda: this.addBrandForm.value.nazivBrenda
     };
 
-    this.http.post('https://localhost:44307/Brend', addBrendRequest)
+    this.adminService.addBrend(addBrendRequest)
       .subscribe(
         (response) => {
           console.log('addBrendRequest successful', response);
           // Perform any additional actions or show success message
+          this.snackBar.open('Brend added successfully!', undefined, {
+            duration:2000
+          });
+          setTimeout(()=>{
+
+            this.router.navigateByUrl('Pregled-brenda');
+
+          },2000)
         },
         (error) => {
           console.error('addBrendRequest failed', error);
           // Handle the error condition, show error message, etc.
         }
       );
+      /*this.adminService.addBrend(addBrendRequest);*/
+
   }
 
 }

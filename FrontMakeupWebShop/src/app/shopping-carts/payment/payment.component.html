@@ -1,0 +1,38 @@
+<div class="body">
+  <div class="main">
+    <div class="signup">
+      <form [formGroup]="paymentForm" id="payment-form" (ngSubmit)="onSubmit()">
+        <label>Podaci o kartici</label>
+        <div class="input-group">
+          <input id="nameOnCard" formControlName="nameOnCard" type="text" name="nameOnCard" placeholder="Name on Card" required>
+          <mat-error *ngIf="paymentForm.get('nameOnCard')?.touched && paymentForm.get('nameOnCard')?.hasError('required')">Name on Card is required</mat-error>
+        </div>
+        <div class="container">
+          <!-- Card Number -->
+          <div class="row mb-3">
+              <div class="col-6 move-right">
+                <div class="form-floating" id="cardNum" >
+                    <div class="form-control" #cardNumber id="cardNumber"></div>
+                    <label>Broj Kartice</label>
+                    <span class="text-danger">{{cardErrors}}</span>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="form-floating">
+                    <div class="form-control" #cardExpiry id="cardExpiry"></div>
+                    <label>Datum Isticanja Kartice</label>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="form-floating">
+                    <div class="form-control" #cardCvc id="cardCvc"></div>
+                    <label>Cvc Broj</label>
+                </div>
+              </div>
+          </div>
+       </div>
+       <button [disabled]="!paymentFormComplete" mat-button class="submit-button" type="button" (click)="submitForm()">Potvrdi Porudžbinu</button>
+      </form>
+    </div>
+  </div>
+</div>

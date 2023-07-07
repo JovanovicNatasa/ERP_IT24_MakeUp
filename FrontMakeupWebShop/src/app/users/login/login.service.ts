@@ -5,6 +5,7 @@ import { User } from 'src/app/models/api-models/user.model';
 import { HttpClient, HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { ShoppingCart } from 'src/app/models/ui-models/shopping-basket.model';
 import { CookieService } from 'ngx-cookie-service';
+import { ShowShoppingCart } from 'src/app/models/api-models/show-shopping-basket.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,17 +13,22 @@ import { CookieService } from 'ngx-cookie-service';
 export class LoginService {
   private baseUri = 'https://localhost:44307';
   private loggedInUsername: string = '';
+  private loggedInPassword: string = '';
   private isLoggedInBool = false;
-  private korpaId: number = 0;
+  private korpaId: number = Number(this.cookieService.get('korpaId')) || 0;
   private korisnikId: number = 0;
+  private uloga: number = 0;
+  private shoppingCartSet = false;
+private shoppingCart: ShowShoppingCart | null = null;
 
   constructor(private httpClient: HttpClient, private cookieService: CookieService) {
     this.checkLoginStatus(); // Check login status on initialization
+    this.checkKorpaId(); // Check korpaId on initialization
   }
 
   setToken(token: string): void {
     const d = new Date();
-  d.setTime(d.getTime() + (1 * 60 * 60 * 1000));
+    d.setTime(d.getTime() + (1 * 60 * 60 * 1000));
     this.cookieService.set('token', token, { expires: d });
   }
 
@@ -30,23 +36,55 @@ export class LoginService {
     return this.cookieService.get('token');
   }
 
+
+  setKorpaId(korpaId: number): void {
+    this.korpaId = korpaId;
+    const d = new Date();
+    d.setTime(d.getTime() + (1 * 60 * 60 * 1000));
+    this.cookieService.set('korpaId', korpaId.toString(), { expires: d });
+  }
+
+  getKorpaId(): number {
+    return Number(this.cookieService.get('korpaId'));
+  }
+
   loginUser(loginRequest: Login): Observable<string> {
-    return this.httpClient.post(this.baseUri + '/Korisnik/login', loginRequest, { responseType: 'text' })
-      .pipe(
-        tap((response: string) => {
-          this.setLoggedIn(true);
-          this.korpaId = this.generateRandomKorpaId();
-          this.setUsername(loginRequest.username);
-        })
-      );
+    return this.httpClient.post(this.baseUri + '/Korisnik/login', loginRequest, { responseType: 'text' }).pipe(
+      switchMap((response: string) => {
+        this.setLoggedIn(true);
+        this.korpaId = this.generateRandomKorpaId();
+        this.setKorpaId(this.korpaId);
+        this.setUsername(loginRequest.username);
+        this.setPassword(loginRequest.lozinka);
+
+        return this.fetchUlogaId().pipe(
+          map((ulogaId: number) => {
+            this.uloga = ulogaId;
+            return response;
+          })
+        );
+      })
+    );
+  }
+
+  getUloga(): number {
+    return this.uloga;
   }
 
   getUsername(): string {
     return this.loggedInUsername;
   }
 
+  getPassword(): string {
+    return this.loggedInPassword;
+  }
+
   setUsername(username: string): void {
     this.loggedInUsername = username;
+  }
+
+  setPassword(password: string): void {
+    this.loggedInPassword = password;
   }
 
   getLoggedIn(): boolean {
@@ -58,21 +96,21 @@ export class LoginService {
     this.cookieService.set('isLoggedIn', value.toString());
   }
 
-  getKorpaId(): number {
-    return this.korpaId;
-  }
 
-  setKorpaId(korpaId: number): void {
-    this.korpaId = korpaId;
-  }
-
-  private generateRandomKorpaId(): number {
+  public generateRandomKorpaId(): number {
     return Math.floor(Math.random() * 1000);
   }
 
   private checkLoginStatus(): void {
     const isLoggedIn = this.cookieService.get('isLoggedIn');
     this.isLoggedInBool = isLoggedIn === 'true';
+  }
+
+  private checkKorpaId(): void {
+    const korpaId = this.cookieService.get('korpaId');
+    if (korpaId) {
+      this.korpaId = Number(korpaId);
+    }
   }
 
 
@@ -83,6 +121,18 @@ export class LoginService {
       map((response: User) => response.korisnikId),
       catchError((error: any) => {
         console.error('Error fetching korisnikId:', error);
+        return of(0); // Return zero if an error occurs
+      })
+    );
+  }
+
+  private fetchUlogaId(): Observable<number> {
+    const username = this.loggedInUsername;
+
+    return this.httpClient.get<User>(this.baseUri + '/Korisnik/username/' + username).pipe(
+      map((response: User) => response.ulogaId),
+      catchError((error: any) => {
+        console.error('Error fetching ulogaId:', error);
         return of(0); // Return zero if an error occurs
       })
     );
@@ -110,33 +160,21 @@ export class LoginService {
   logout(): void {
     console.log('Logout method called');
     this.cookieService.delete('token');
+    this.cookieService.delete('korpaId');
     this.clearLocalStorage();
     this.clearKorisnikId();
     this.setLoggedIn(false); // Set isLoggedInBool to false
   }
 
-
   private clearLocalStorage() {
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
-    }
+    localStorage.removeItem('korisnik_id');
+    localStorage.removeItem('korpaId')
+  }
 
   private clearKorisnikId() {
     this.korisnikId = 0;
-    }
-}
-
-@Injectable()
-export class AuthInterceptor implements HttpInterceptor {
-  constructor(private cookieService: CookieService) {}
-
-  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    // Get the token from the cookie
-    const token = this.cookieService.get('token');
-    if (token) {
-      const headers = request.headers.set('Authorization', `Bearer ${token}`);
-      request = request.clone({ headers });
-    }
-    return next.handle(request);
+    this.korpaId=0;
   }
 }

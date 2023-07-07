@@ -241,6 +241,9 @@ public partial class MakeUpDbContext : DbContext
             entity.Property(e => e.IznosPost).HasColumnType("numeric(8, 2)");
             entity.Property(e => e.IznosSaPopustom).HasColumnType("numeric(8, 2)");
             entity.Property(e => e.IznosSaPost).HasColumnType("numeric(8, 2)");
+            entity.Property(e => e.ClientSecret).HasMaxLength(100).IsUnicode(false);
+            entity.Property(e => e.PaymentIntentId).HasMaxLength(100).IsUnicode(false);
+            entity.Property(e => e.Status).HasMaxLength(100).IsUnicode(false);
             entity.Property(e => e.KorpaId)
                 .HasColumnType("int")
                 .HasColumnName("KorpaID");

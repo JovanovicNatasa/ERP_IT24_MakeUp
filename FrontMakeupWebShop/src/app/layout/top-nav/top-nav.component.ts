@@ -97,6 +97,14 @@ export class TopNavComponent {
     this.filterService.setTypeFilter(selectedTypes);
     this.filterApplied.emit(true);
   }
+
+  isAdmin(): boolean {
+    if (this.loginService.getUloga() == 1) {
+      return false;
+    } else {
+      return true;
+    }
+  }
 }
 
 

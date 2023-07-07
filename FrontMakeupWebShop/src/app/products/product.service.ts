@@ -10,6 +10,7 @@ export class ProductService {
 
   private baseUri = 'https://localhost:44307';
   constructor(private httpClient:HttpClient) {}
+
   getProducts(): Observable<Product[]> {
     return this.httpClient.get<Product[]>(this.baseUri+'/Proizvod');
   }
@@ -17,4 +18,5 @@ export class ProductService {
   getSingleProduct(proizvodId: number): Observable<Product>{
     return this.httpClient.get<Product>(this.baseUri+'/Proizvod/'+proizvodId)
   }
+
 }
