@@ -44,4 +44,8 @@ export class ShoppingCartsService {
     return this.httpClient.post<AddedBill>(this.baseUri +'/'+ racunId,racunId);
   }
 
+  getMaxBillId():Observable<number>{
+    return this.httpClient.get<number>(this.baseUri+'/Racun/max-racun-id');
+  }
+
 }

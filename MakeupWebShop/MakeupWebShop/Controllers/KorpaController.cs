@@ -84,7 +84,7 @@ namespace MakeupWebShop.Controllers
    
             return Ok(shoppingCartDto);
         }
-        [HttpDelete, Authorize(Roles = "Admin")]
+        [HttpDelete, Authorize(Roles = "Admin,User")]
         [Route("{id:int}")]
         public async Task<IActionResult> DeleteShoppingCartAsync(int id)
         {

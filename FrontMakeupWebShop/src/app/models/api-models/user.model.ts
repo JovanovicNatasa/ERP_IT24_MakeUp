@@ -7,6 +7,7 @@ export interface User {
   kontakt: string;
   username: string;
   lozinka: string;
+  brojKupovina:number;
   ulogaId:number;
   adresa: {
     adresaId: number;

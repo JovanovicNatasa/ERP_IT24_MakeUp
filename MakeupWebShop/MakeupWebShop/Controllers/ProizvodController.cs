@@ -121,6 +121,35 @@ namespace MakeupWebShop.Controllers
             //Return ok
             return Ok(productDto);
         }
-        
+
+        /*[HttpPost("upload-image/{proizvodId}"), Authorize(Roles = "Admin")]
+        public async Task<IActionResult> UploadImageAsync(IFormFile file, int proizvodId)
+        {
+            // Check if the file is null or empty
+            if (file == null || file.Length == 0)
+            {
+                return BadRequest("No file uploaded.");
+            }
+
+            // Generate the file name with product ID
+            string fileName = $"product-{proizvodId}.jpg";
+
+            // Specify the path where the image should be saved
+            string folderPath = @"C:\Users\jovan\OneDrive\Desktop\Faks\8.SEMESTAR\ERP\Projekat_makeup\FrontMakeupWebShop\src\assets";
+            string imagePath = Path.Combine(folderPath, fileName);
+
+            // Save the image to the specified path
+            using (var stream = new FileStream(imagePath, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
+
+            return Ok(fileName);
+        }*/
+
+
+
+
     }
 }
+

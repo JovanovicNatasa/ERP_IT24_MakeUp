@@ -7,6 +7,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 
+
 // Material Modules
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -81,6 +82,7 @@ import { UpdateProizvodComponent } from './admin/update/update-proizvod/update-p
 import { UpdateTipComponent } from './admin/update/update-tip/update-tip.component';
 import { KorisnikComponent } from './admin/tables/korisnik/korisnik.component';
 import { RacunComponent } from './admin/tables/racun/racun.component';
+import { UpdateUlogaKorisnikComponent } from './admin/update/update-uloga-korisnik/update-uloga-korisnik.component';
 
 
 
@@ -122,7 +124,8 @@ import { RacunComponent } from './admin/tables/racun/racun.component';
     UpdateProizvodComponent,
     UpdateTipComponent,
     KorisnikComponent,
-    RacunComponent
+    RacunComponent,
+    UpdateUlogaKorisnikComponent
   ],
   entryComponents: [
     SuccessDialogComponent,

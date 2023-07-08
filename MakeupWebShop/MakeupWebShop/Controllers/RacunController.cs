@@ -131,6 +131,16 @@ namespace MakeupWebShop.Controllers
             return Ok(billDto);
         }
 
+        [HttpGet]
+        [Route("max-racun-id")]
+        public IActionResult GetMaxRacunId()
+        {
+            var maxRacunId = racunRepository.GetMaxRacunId();
+            return Ok(maxRacunId);
+        }
+
+
+
 
     }
 }

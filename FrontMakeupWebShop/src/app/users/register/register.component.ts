@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { RegisterService } from './register.service';
 import { User } from 'src/app/models/ui-models/user.model';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -12,7 +14,8 @@ export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
   registerData = new User();
 
-  constructor(private registerService: RegisterService, private formBuilder: FormBuilder) {}
+  constructor(private registerService: RegisterService, private formBuilder: FormBuilder,private readonly snackBar: MatSnackBar,
+    private readonly router:Router) {}
 
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group({
@@ -25,6 +28,7 @@ export class RegisterComponent implements OnInit {
       grad: ['', Validators.required],
       ulica: ['', Validators.required],
       broj: ['', Validators.required],
+      potvrdaLozinke: new FormControl('', Validators.required),
       postanskiBroj: ['', Validators.required]
     });
   }
@@ -79,20 +83,19 @@ export class RegisterComponent implements OnInit {
     // Assuming that the `registerUser` method of `RegisterService` returns an Observable
     this.registerService.registerUser(this.registerData).subscribe(
       (response: any) => {
-        // Handle successful registration
-        console.log("Registration successful:", response);
-        // Optionally display a success message to the user
+        this.snackBar.open('Uspešno ste se registrovali!', undefined, {
+          duration:2000
+        });
+        setTimeout(()=>{
+          this.router.navigateByUrl('Korisnik/login');
+
+        },2000)
+
       },
       (error: any) => {
-        // Handle registration error
-        console.error("Registration failed:", error);
-        // Log the complete error response
-        console.log("Error response:", error.error);
-        // Check if the error response contains validation errors for the Adresa field
-        if (error.error && error.error.errors && error.error.errors['$.adresa.postanskiBroj']) {
-          console.log("Adresa validation errors:", error.error.errors['$.adresa.postanskiBroj']);
-          // Optionally display an error message to the user
-        }
+        this.snackBar.open('Ups, pokušajte ponovo', undefined, {
+          duration:2000
+        });
       }
     );
   }

@@ -13,6 +13,8 @@ namespace MakeupWebShop.Repositories
         Task<TblRacun> DeleteAsync(int id);
 
         Task<TblRacun> GetByPaymentIntentIdAsync(string paymentIntentId);
+
+        public int GetMaxRacunId();
         //Task<TblRacun> CalculateShipping(int racunId);
     }
 }

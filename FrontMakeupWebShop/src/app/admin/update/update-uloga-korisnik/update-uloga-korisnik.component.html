@@ -1,0 +1,93 @@
+<div class="page-header">
+  <div class="container">
+    <h1>Update Uloga Korisnik</h1>
+  </div>
+</div>
+<hr>
+<div class="container">
+  <div class="row top-row">
+    <div class="col-xs-12 row end-xs">
+      <a routerLink="/Pregled-korisnika" color="primary" mat-raised-button>
+        <mat-icon>chevron-left</mat-icon>
+        Nazad
+      </a>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-6">
+      <form #ulogaUpdateForm="ngForm">
+        <div class="row">
+          <div class="col-xs-6">
+            <mat-form-field appearance="fill" [style.width.px]=250>
+              <mat-label>Uloga</mat-label>
+              <mat-select [(ngModel)]="user.uloga.ulogaId" name="uloga">
+                <mat-option *ngFor="let uloga of ulogaList" [value]="uloga.ulogaId">
+                  {{ uloga.nazivUloge }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-6">
+            <mat-form-field appearance="fill" [style.width.px]=250>
+              <mat-label>Ime</mat-label>
+              <input type="text" matInput [(ngModel)]="user.ime" name="ime" disabled>
+            </mat-form-field>
+          </div>
+          <div class="col-xs-6">
+            <mat-form-field appearance="fill" [style.width.px]=250>
+              <mat-label>Prezime</mat-label>
+              <input type="text" matInput [(ngModel)]="user.prezime" name="prezime" disabled>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-6">
+            <mat-form-field appearance="fill" [style.width.px]=250>
+              <mat-label>Email</mat-label>
+              <input type="email" matInput [(ngModel)]="user.email" name="email" disabled>
+            </mat-form-field>
+          </div>
+          <div class="col-xs-6">
+            <mat-form-field appearance="fill" [style.width.px]=250>
+              <mat-label>Kontakt</mat-label>
+              <input type="text" matInput [(ngModel)]="user.kontakt" name="kontakt" disabled>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-6">
+            <mat-form-field appearance="fill" [style.width.px]=250>
+              <mat-label>Username</mat-label>
+              <input type="text" matInput [(ngModel)]="user.username" name="username" disabled>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-6">
+            <mat-form-field appearance="fill" [style.width.px]=250>
+              <mat-label>Broj Kupovina</mat-label>
+              <input type="text" matInput [(ngModel)]="user.brojKupovina" name="brojKupovina" disabled>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row-2">
+          <div class="col-cs">
+            <div class="row between-xs">
+              <button mat-raised-button color="primary" (click)="onUpdate()">Save</button>
+              <button mat-raised-button color="warn"  [disabled]="user.brojKupovina !== 0" (click)="onDelete()">Delete</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+

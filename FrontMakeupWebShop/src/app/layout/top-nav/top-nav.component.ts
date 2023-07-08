@@ -3,6 +3,8 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { FilterService } from 'src/app/filter.service';
 import { SearchService } from 'src/app/search/serach-s.service';
 import { LoginService } from 'src/app/users/login/login.service';
+import { ActivatedRoute } from '@angular/router';
+
 
 
 @Component({
@@ -36,7 +38,7 @@ export class TopNavComponent {
 
 
   constructor(private searchService: SearchService,private filterService: FilterService,
-    public loginService: LoginService ) { }
+    public loginService: LoginService,private route: ActivatedRoute ) { }
 
     isLoggedIn(): boolean {
       return this.loginService.getLoggedIn();
@@ -99,12 +101,16 @@ export class TopNavComponent {
   }
 
   isAdmin(): boolean {
-    if (this.loginService.getUloga() == 1) {
-      return false;
-    } else {
+    if (this.loginService.getUloga() == 2) {
       return true;
+    } else {
+      return false;
     }
   }
+  isAdminPanelRoute(): boolean {
+    return this.route.snapshot.url[0].path === 'Admin-panel';
+  }
+  
 }
 
 

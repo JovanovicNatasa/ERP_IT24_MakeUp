@@ -18,6 +18,7 @@ export class LoginService {
   private korpaId: number = Number(this.cookieService.get('korpaId')) || 0;
   private korisnikId: number = 0;
   private uloga: number = 0;
+  private logOut:boolean=false;
   private shoppingCartSet = false;
 private shoppingCart: ShowShoppingCart | null = null;
 
@@ -34,6 +35,12 @@ private shoppingCart: ShowShoppingCart | null = null;
 
   getToken(): string | null {
     return this.cookieService.get('token');
+  }
+  setLogOut(logoutBool:boolean){
+    this.logOut=logoutBool;
+  }
+  getLogOut(){
+    return this.logOut;
   }
 
 
@@ -153,6 +160,10 @@ private shoppingCart: ShowShoppingCart | null = null;
     );
   }
 
+  deleteKorpa(korpaId:number):Observable<any>{
+    return this.httpClient.delete(this.baseUri +'/Korpa/' + korpaId)
+  }
+
   getKorisnikId(): number {
     return this.korisnikId;
   }
@@ -177,4 +188,5 @@ private shoppingCart: ShowShoppingCart | null = null;
     this.korisnikId = 0;
     this.korpaId=0;
   }
+
 }

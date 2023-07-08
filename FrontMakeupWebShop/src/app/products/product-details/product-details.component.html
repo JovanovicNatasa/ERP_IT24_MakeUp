@@ -1,5 +1,5 @@
 <mat-divider></mat-divider>
-<mat-grid-list cols="4" rowHeight="200px">
+<mat-grid-list cols="4" rowHeight="200px" *ngIf="product && product.tip && product.brend && product.kolekcija">
   <mat-grid-tile [colspan]="2" [rowspan]="2" class="photo-tile">
     <img [src]="'assets/product-' + (product.proizvodId) + '.jpg'">
   </mat-grid-tile>

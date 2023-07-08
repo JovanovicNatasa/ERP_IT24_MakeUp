@@ -3,6 +3,7 @@ import { LoginService } from './login.service';
 import { ShoppingCart } from 'src/app/models/ui-models/shopping-basket.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,7 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
 
 
-  constructor(private loginService: LoginService,private formBuilder: FormBuilder, private router:Router) {
+  constructor(private loginService: LoginService,private formBuilder: FormBuilder, private router:Router,private readonly snackBar: MatSnackBar) {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       lozinka: ['', Validators.required]
@@ -71,19 +72,18 @@ export class LoginComponent implements OnInit {
           this.createKorpa();
           this.router.navigateByUrl('/'); // Redirect to the home route
         }
+        this.loginService.setLogOut(false);
       },
       (error: any) => {
-        // Handle login error
-        console.error('Error:', error);
+        this.snackBar.open('Pogrešna lozinka, pokušajte ponovo', undefined, {
+          duration:2000
+        });
       }
     );
   }
 
-  logout() {
-    console.log('Logout button clicked');
-    this.loginService.logout(); // Call the logout() method from the LoginServiceService
-    this.token = ''; // Clear the token variable in the component
-  }
+
+
 
 
   createKorpa(): void {
@@ -113,6 +113,7 @@ export class LoginComponent implements OnInit {
       console.error("Error creating korpa:", error);
     }
   }
+
 
 
   MarkAllAsTouched(){

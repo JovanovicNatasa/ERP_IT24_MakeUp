@@ -15,7 +15,7 @@ export interface Product{
 	namenaId: number,
   namena:Purpose,
 	tipId: number,
-  tip: Type,
+  tip: Type ,
 	kolekcijaId: number,
   kolekcija: Collection
 }

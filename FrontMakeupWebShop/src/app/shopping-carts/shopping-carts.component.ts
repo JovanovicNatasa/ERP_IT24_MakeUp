@@ -18,7 +18,6 @@ export class ShoppingCartsComponent implements OnInit {
   productsInCart: ProductInCart[] = []; // Array to store products in the cart
   korpa: ShoppingCart | undefined;
   korpaId = this.loginService.getKorpaId();
-  id:number=28;
 
   constructor(
     private shoppingCartsService: ShoppingCartsService,
@@ -55,29 +54,34 @@ export class ShoppingCartsComponent implements OnInit {
   }
 
   addBill() {
-    this.id+=1;
-    const addBillRequest: AddBill = {
-      racunId:this.id,
-      korpaId:this.korpaId
-    };
-
-    try {
-      // Call the API to create the "racun"
-      this.shoppingCartsService.postBill(addBillRequest).subscribe(
-        (response: any) => {
-          // Log the response to the console
-          console.log("Racun created:", response);
-        },
-        (error: any) => {
+    this.shoppingCartsService.getMaxBillId().subscribe(
+      (maxRacunId: number) => {
+        const racunId = maxRacunId + 1;
+        const addBillRequest: AddBill = {
+          racunId: racunId,
+          korpaId: this.korpaId
+        };
+  
+        try {
+          // Call the API to create the "racun"
+          this.shoppingCartsService.postBill(addBillRequest).subscribe(
+            (response: any) => {
+              // Log the response to the console
+              console.log("Racun created:", response);
+            },
+            (error: any) => {
+              // Handle error while creating "racun"
+              console.error("Error creating racun:", error);
+            }
+          );
+        } catch (error) {
           // Handle error while creating "racun"
           console.error("Error creating racun:", error);
         }
-      );
-    } catch (error) {
-      // Handle error while creating "racun"
-      console.error("Error creating racun:", error);
-    }
+      }
+    );
   }
+  
 
 
   setIznos(): number {

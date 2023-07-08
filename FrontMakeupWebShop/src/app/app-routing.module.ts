@@ -25,6 +25,8 @@ import { UpdateNamenaComponent } from './admin/update/update-namena/update-namen
 import { UpdateKolekcijaComponent } from './admin/update/update-kolekcija/update-kolekcija.component';
 import { RacunComponent } from './admin/tables/racun/racun.component';
 import { KorisnikComponent } from './admin/tables/korisnik/korisnik.component';
+import { UpdateUlogaKorisnikComponent } from './admin/update/update-uloga-korisnik/update-uloga-korisnik.component';
+import { ProfileComponent } from './users/profile/profile.component';
 
 const routes: Routes = [
   {
@@ -123,12 +125,20 @@ const routes: Routes = [
     component:UpdateKolekcijaComponent
   },
   {
+    path:'Pregled-korisnika/:id',
+    component:UpdateUlogaKorisnikComponent
+  },
+  {
     path:'Isporuka',
     component:ShippingInformationComponent
   },
   {
     path:'Placanje',
     component:PaymentComponent
+  },
+  {
+    path:'Profil',
+    component:ProfileComponent
   }
 
 

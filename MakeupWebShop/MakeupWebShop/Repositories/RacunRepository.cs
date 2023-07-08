@@ -87,5 +87,12 @@ namespace MakeupWebShop.Repositories
         {
             return await makeUpDbContext.TblRacuns.Include(x => x.Korpa).FirstOrDefaultAsync(x => x.PaymentIntentId == paymentIntentId);
         }
+
+        public int GetMaxRacunId()
+        {
+            var maxRacunId = makeUpDbContext.TblRacuns.Max(r => r.RacunId);
+            return maxRacunId;
+        }
+
     }
 }

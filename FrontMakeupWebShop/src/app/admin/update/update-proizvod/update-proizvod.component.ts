@@ -121,7 +121,6 @@ export class UpdateProizvodComponent implements OnInit {
   }
 
   onDelete():void{
-
     this.adminService.deleteProizvod(this.product.proizvodId)
     .subscribe(
       (successResponse)=>{
@@ -142,7 +141,5 @@ export class UpdateProizvodComponent implements OnInit {
         });
       }
     )
-
-
   }
 }

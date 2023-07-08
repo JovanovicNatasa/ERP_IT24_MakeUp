@@ -13,7 +13,7 @@ import { MatSort } from '@angular/material/sort';
 export class KorisnikComponent implements OnInit{
   korisnik:User[]=[];
 
-  displayedColumns: string[] = ['ime', 'prezime', 'email', 'brojKupovina', 'grad', 'nazivUloge'];
+  displayedColumns: string[] = ['ime', 'prezime', 'email', 'brojKupovina', 'grad', 'nazivUloge','edit'];
   dataSource: MatTableDataSource<User>= new MatTableDataSource<User>();
 
   constructor(private adminService: AdminService){}

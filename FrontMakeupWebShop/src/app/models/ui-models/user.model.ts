@@ -6,6 +6,7 @@ export class User {
   kontakt: string;
   username: string;
   lozinka: string;
+  brojKupovina:number;
   adresa: Address;
   uloga:Uloga;
 
@@ -17,6 +18,7 @@ export class User {
     this.kontakt = '';
     this.username = '';
     this.lozinka = '';
+    this.brojKupovina=0;
     this.adresa = new Address();
     this.uloga=new Uloga();
   }
@@ -49,5 +51,13 @@ export class Address {
       this.nazivUloge='';
       this.kratakOpis='';
       this.sifra ='';
+    }
+  }
+
+  export class UpdateKorisnikUlogaRequest{
+    ulogaId:number;
+
+    constructor(){
+      this.ulogaId=0;
     }
   }

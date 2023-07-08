@@ -13,7 +13,7 @@ import{ToastrService} from 'ngx-toastr'
 })
 export class ProductDetailsComponent implements OnInit {
 
-  product!: Product;
+  product: Product = {} as Product; // Initialize with empty object
   activeTab: string = 'sastav';
   quantity: number = 1;
 
@@ -47,17 +47,7 @@ export class ProductDetailsComponent implements OnInit {
     this.activeTab = tab;
   }
 
- /* incrementQuantity(): void {
-    if (this.quantity < this.product.kolicinaNaStanju) {
-      this.quantity++;
-    }
-  }
 
-  decrementQuantity(): void {
-    if (this.quantity > 1) {
-      this.quantity--;
-    }
-  }*/
   incrementQuantity(): void {
     this.quantity = this.productDetailsService.incrementQuantity(this.quantity);
   }

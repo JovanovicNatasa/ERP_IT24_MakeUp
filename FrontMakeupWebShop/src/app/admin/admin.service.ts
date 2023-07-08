@@ -12,7 +12,7 @@ import { AddTipRequest } from '../models/api-models/type.model';
 import { AddProizvodRequest } from '../models/api-models/product.model';
 import { UpdateProizvodRequest } from '../models/api-models/product.model';
 import { ShowBill } from '../models/api-models/show-bill.model';
-import { User } from '../models/ui-models/user.model';
+import { Uloga, UpdateKorisnikUlogaRequest, User } from '../models/ui-models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -106,5 +106,25 @@ export class AdminService {
   getKorisnik():Observable<User[]>{
     return this.httpClient.get<User[]>(this.baseUri+'/Korisnik')
   }
+  getSingleKorisnik(korisnikId:number): Observable<User> {
+    return this.httpClient.get<User>(this.baseUri+'/Korisnik/'+ korisnikId)
+  }
 
+  updateUlogaKorisnik(korisnikId: number, request: UpdateKorisnikUlogaRequest): Observable<any> {
+    return this.httpClient.put(this.baseUri + '/Korisnik/' + korisnikId + '/uloga', request);
+  }
+
+  deleteUser(korisnikId:number):Observable<any>{
+    return this.httpClient.delete(this.baseUri +'/Korisnik/' + korisnikId)
+  }
+
+  getUloga():Observable<Uloga[]>{
+    return this.httpClient.get<Uloga[]>(this.baseUri + '/api/Uloga')
+  }
+  /*uploadImage(file: FormData, proizvodId: number): Observable<any> {
+    return this.httpClient.post<any>(`https://localhost:44307/Proizvod/upload-image/${proizvodId}`, file); // Promenite URL prema novoj putanji
+  }*/
+  
+  
+  
 }

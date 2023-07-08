@@ -51,7 +51,16 @@
             Poštanski broj is required.
           </mat-error>
         </div>
-        <button type="submit">Sign up</button>
+        <div class="input-group">
+            <input id="potvrdaLozinke" formControlName="potvrdaLozinke" type="password" name="potvrdaLozinke" placeholder="Potvrdi lozinku" required>
+            <mat-error *ngIf="registerForm.controls['potvrdaLozinke'].touched && registerForm.controls['potvrdaLozinke'].value === ''">
+              This field is required.
+            </mat-error>
+            <mat-error mat-error *ngIf="registerForm.controls['lozinka'].value !== registerForm.controls['potvrdaLozinke'].value && registerForm.controls['potvrdaLozinke'].touched">
+              Lozinka i Potvrda lozinke se ne podudaraju.
+            </mat-error>
+        </div>
+        <button [disabled]="registerForm.controls['lozinka'].value !== registerForm.controls['potvrdaLozinke'].value" type="submit" >Sign up</button>
         <button mat-button class="login-button" routerLink="/Korisnik/login">Uloguj se</button>
       </form>
     </div>

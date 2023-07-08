@@ -1,1 +1,65 @@
-<p>profile works!</p>
+<div class="body">
+  <div class="main">
+    <div class="signup">
+      <form [formGroup]="profileForm">
+        <label>PROFIL</label>
+        <div class="input-group">
+          <mat-error *ngIf="profileForm.controls['ime'].touched && profileForm.controls['ime'].value === ''">
+            Ime is required.
+          </mat-error>
+          <input id="ime" formControlName="ime" type="text" name="ime" placeholder="Ime" required [disabled]="!isEditMode">
+          <mat-error *ngIf="profileForm.controls['grad'].touched && profileForm.controls['grad'].value === ''">
+            Grad is required.
+          </mat-error>
+          <input id="grad" formControlName="grad" type="text" name="grad" placeholder="Grad" required [disabled]="!isEditMode">
+        </div>
+        <div class="input-group">
+          <input id="przime" formControlName="prezime" type="text" name="prezime" placeholder="Prezime" required [disabled]="!isEditMode">
+          <mat-error *ngIf="profileForm.controls['prezime'].touched && profileForm.controls['prezime'].value === ''">
+            Prezime is required.
+          </mat-error>
+
+          <input id="postanskiBroj" formControlName="postanskiBroj" type="text" name="postanskiBroj" placeholder="Poštanski broj" required [disabled]="!isEditMode">
+          <mat-error *ngIf="profileForm.controls['postanskiBroj'].touched && profileForm.controls['postanskiBroj'].value === ''">
+            Poštanski broj is required.
+          </mat-error>
+
+        </div>
+        <div class="input-group">
+          <input id="kontakt" formControlName="kontakt" type="text" name="kontakt" placeholder="Kontakt" required [disabled]="!isEditMode">
+          <mat-error *ngIf="profileForm.controls['kontakt'].touched && profileForm.controls['kontakt'].value === ''">
+            Kontakt is required.
+          </mat-error>
+
+          <input id="ulica" formControlName="ulica" type="text" name="ulica" placeholder="Ulica" required [disabled]="!isEditMode">
+          <mat-error *ngIf="profileForm.controls['ulica'].touched && profileForm.controls['ulica'].value === ''">
+            Ulica is required.
+          </mat-error>
+        </div>
+        <div class="input-group">
+          <input id="broj" formControlName="broj" type="text" name="broj" placeholder="Broj" required [disabled]="!isEditMode">
+          <mat-error *ngIf="profileForm.controls['broj'].touched && profileForm.controls['broj'].value === ''">
+            Broj is required.
+          </mat-error>
+        </div>
+        <div class="input-group">
+          <input id="username" formControlName="username" type="text" name="username" placeholder="Korisničko ime" required [disabled]="!isEditMode">
+          <mat-error *ngIf="profileForm.controls['username'].touched && profileForm.controls['username'].value === ''">
+            Korisničko ime is required.
+          </mat-error>
+        </div>
+        <div class="input-group">
+          <input id="lozinka" formControlName="lozinka" type="password" name="lozinka" placeholder="Lozinka" required [disabled]="!isEditMode">
+          <mat-error *ngIf="profileForm.controls['lozinka'].touched && profileForm.controls['lozinka'].value === ''">
+            Lozinka is required.
+          </mat-error>
+        </div>
+        <button mat-button class="edit-button" (click)="toggleEditMode()">Izmeni podatke</button>
+        <button mat-button class="logout-button" (click)="logout()" routerLink="/Korisnik/login">Izloguj se</button>
+        <button mat-button class="save-button" (click)="updateUser()" [disabled]="!isEditMode">Sačuvaj</button>
+      </form>
+      <h1 style="text-align-last: center; color: white;">BROJ KUPOVINA: {{getBrojKupovina()}}</h1>
+    </div>
+    
+  </div>
+</div>
